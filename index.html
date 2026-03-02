@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Operación Enigma - Acceso DOS</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+</head>
+
+<body>
+
+    <div class="dos-container" id="dos-container">
+
+        <!-- Header -->
+        <div id="header-line"></div>
+
+        <!-- Subheader -->
+        <div id="instruction-line"></div>
+
+        <!-- Input Area -->
+        <div id="input-container" class="input-group">
+            <input type="text" id="code-input" placeholder="Contraseña" autocomplete="off" autocorrect="off"
+                autocapitalize="characters" spellcheck="false" maxlength="10">
+
+            <button id="btn-verify" class="dos-btn btn-verify">
+                VERIFICAR
+            </button>
+        </div>
+
+        <!-- System Messages -->
+        <div id="message-area"></div>
+
+    </div>
+
+    <!-- Loading Screen (Hidden by default) -->
+    <div id="loading-container" class="hidden">
+        <img src="escudo.png" alt="Escudo de La Orden" class="shield-logo">
+        <div class="loading-text">DESENCRIPTANDO DATOS DE LA ORDEN...</div>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
+    <!-- Modern Agency UI (Hidden by default) -->
+    <div id="agency-container" class="hidden">
+        <header class="agency-header">
+            <div class="header-left">
+                <img src="escudo.png" alt="Escudo" class="agency-logo-small">
+                <h1>LA ORDEN</h1>
+            </div>
+
+            <div class="timer-container">
+                <span id="countdown-timer">02:00:00</span>
+            </div>
+
+            <div class="status-indicator" style="display: flex; align-items: center; gap: 20px;">
+                <div><span class="pulse-dot"></span> SECURE CONNECTION</div>
+                <button class="agency-btn btn-finish" id="btn-finalizar">
+                    <span>⚠️</span> FINALIZAR MISIÓN
+                </button>
+            </div>
+        </header>
+
+        <div class="agency-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="agency-sidebar glass-panel">
+                <nav class="agency-nav">
+                    <button class="nav-btn active" data-tab="dashboard">
+                        <span class="nav-icon">⎈</span> PANEL CENTRAL
+                    </button>
+                    <button class="nav-btn" data-tab="archivos">
+                        <span class="nav-icon">▤</span> ARCHIVOS CLASIFICADOS
+                    </button>
+                    <button class="nav-btn" data-tab="red-global">
+                        <span class="nav-icon">◈</span> RED GLOBAL
+                    </button>
+                </nav>
+                <div class="agent-stats">
+                    <p>STATUS: <span style="color: #33ff33;">ONLINE</span></p>
+                    <p>MISIONES HOY: <span style="color: #00ffcc;">14</span></p>
+                    <p>AGS CONECTADOS: <span id="connected-agents">--</span></p>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="agency-content glass-panel">
+
+                <!-- Tab: Dashboard -->
+                <div id="tab-dashboard" class="tab-content active-tab">
+                    <h2 id="agency-welcome">BIENVENIDOS, RECLUTAS</h2>
+                    <p>EL PROTOCOLO DE GRUPO HA SIDO DESBLOQUEADO CON ÉXITO.</p>
+
+                    <div class="mission-details">
+                        <h3>NUEVO MANDATO:</h3>
+                        <p>La Orden requiere su asistencia inmediata en una operación de campo. Manténganse alerta: han
+                            sido detectadas intercepciones en nuestros canales por unidades enemigas no identificadas.
+                            Cuiden su entorno. No confíen en extraños.</p>
+                    </div>
+
+                    <div class="dashboard-footer">
+                        <button class="agency-btn" id="btn-ver-archivos-dash">PROCEDER A ARCHIVOS</button>
+                    </div>
+                </div>
+
+                <!-- Tab: Archivos Clasificados -->
+                <div id="tab-archivos" class="tab-content hidden-tab">
+                    <h2>ARCHIVOS DE OPERACIÓN</h2>
+                    <p style="color: #aaa; margin-bottom: 20px;">SELECCIONE UN PAQUETE DE DATOS PARA INICIAR.</p>
+
+                    <div class="files-grid" id="archivos-grid">
+                        <div class="file-card active-file">
+                            <div class="file-icon">🗃️</div>
+                            <h4>MISIÓN DE CAMPO 01</h4>
+                            <p class="file-status warning">PENDIENTE</p>
+                            <button class="agency-btn small-btn" id="btn-abrir-mision1">ABRIR ARCHIVO</button>
+                        </div>
+
+                        <div class="file-card locked">
+                            <div class="file-icon">🔒</div>
+                            <h4>DOCUMENTO [CENSURADO]</h4>
+                            <p class="file-status error">BLOQUEADO</p>
+                            <button class="agency-btn small-btn" disabled>REQ. AUTORIZACIÓN L2</button>
+                        </div>
+
+                        <div class="file-card locked">
+                            <div class="file-icon">🔒</div>
+                            <h4>UBICACIÓN FINAL</h4>
+                            <p class="file-status error">ENCRIPTADO</p>
+                            <button class="agency-btn small-btn" disabled>REQ. COMPLETAR FASE 2</button>
+                        </div>
+                    </div>
+
+                    <!-- Contenido de la Misión 1 (Oculto inicialmente) -->
+                    <div id="mision-1-content" class="hidden-tab">
+                        <button class="agency-btn small-btn" id="btn-volver-archivos" style="margin-bottom: 20px;">⬅
+                            VOLVER</button>
+                        <h3 style="color: #00ffcc;">MISIÓN DESBLOQUEADA</h3>
+                        <p>Búsqueda de objetivo en las siguientes coordenadas:</p>
+                        <h2 style="letter-spacing: 2px;">40.6552345, -3.1762954</h2>
+                        <div class="map-container"
+                            style="width: 100%; height: 300px; margin-bottom: 20px; border: 1px solid #00ffcc; border-radius: 4px; overflow: hidden; filter: invert(90%) hue-rotate(180deg) contrast(120%);">
+                            <iframe width="100%" height="100%" frameborder="0" style="border:0;"
+                                src="https://maps.google.com/maps?q=40.65523456059397,-3.1762954287264553&hl=es&z=17&output=embed"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=40.65523456059397,-3.1762954287264553"
+                            target="_blank" class="dos-link"
+                            style="display:inline-block; margin-bottom: 30px; font-size: 0.8rem; color: #888; text-decoration: none;">[
+                            OBTENER INDICACIONES EN APLICACIÓN EXTERNA ]</a>
+
+                        <div class="mission-details">
+                            <p>Desplácense físicamente hasta el punto indicado. Cuando consideren que han llegado al
+                                objetivo, escaneen su señal GPS para verificar su posición satelital.</p>
+                        </div>
+
+                        <button class="agency-btn" id="btn-verificar-gps"
+                            style="width: 100%; margin-top: 20px;">ESCANEAR UBICACIÓN ACTUAL</button>
+                        <p id="gps-status" style="margin-top: 15px; color: #ffaa00; text-align: center;"></p>
+
+                        <!-- Mensaje de éxito que aparece cuando llegan -->
+                        <div id="mision-1-success" class="hidden-tab"
+                            style="margin-top: 30px; border-top: 1px solid #33ff33; padding-top: 20px;">
+                            <h3 style="color: #33ff33;">¡UBICACIÓN CONFIRMADA!</h3>
+                            <p>Excelente trabajo, agentes. Sus firmas están registradas en el sector.</p>
+                            <p style="color: #00ffcc; font-style: italic;">[AQUÍ IRA LA SIGUIENTE PISTA O INSTRUCCIÓN
+                                QUE PIDAS AL CREADOR DEL JUEGO]</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Red Global -->
+                <div id="tab-red-global" class="tab-content hidden-tab">
+                    <h2>RED DE INTELIGENCIA GLOBAL</h2>
+                    <p style="color: #aaa; margin-bottom: 20px;">INTERCEPTANDO COMUNICACIONES DE OTRAS UNIDADES...</p>
+
+                    <div class="live-feed-container" id="live-feed">
+                        <!-- JS injected fake events -->
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Audio -->
+    <audio id="typing-sound" src="https://assets.mixkit.co/active_storage/sfx/2405/2405-preview.mp3"
+        preload="auto"></audio>
+
+    <audio id="access-granted-sound" src="https://assets.mixkit.co/active_storage/sfx/100/100-preview.mp3"
+        preload="auto"></audio>
+
+    <audio id="access-denied-sound" src="https://assets.mixkit.co/active_storage/sfx/256/256-preview.mp3"
+        preload="auto"></audio>
+
+    <!-- Scripts (Firebase modular) -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="app.js"></script>
+
+</body>
+
+</html>
