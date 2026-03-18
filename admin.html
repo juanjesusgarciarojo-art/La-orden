@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuartel General - La Orden (Panel de Control)</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <!-- Bloqueo de Seguridad Admin -->
+    <div id="admin-login-overlay"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Courier New', monospace;">
+        <div
+            style="border: 2px solid #ff3333; padding: 30px; background: rgba(255,51,51,0.05); text-align: center; max-width: 400px;">
+            <h2 style="color: #ff3333; margin-bottom: 20px;">[ ACCESO RESTRINGIDO ]</h2>
+            <p style="color: #aaa; margin-bottom: 20px; font-size: 0.9rem;">IDENTIFÍQUESE COMO MANDO CENTRAL PARA
+                CONTINUAR:</p>
+            <input type="password" id="admin-pass-input" placeholder="CÓDIGO DE MANDO"
+                style="width: 100%; background: transparent; border: 1px solid #ff3333; color: #ff3333; padding: 12px; text-align: center; outline: none; margin-bottom: 20px; font-size: 1.2rem;">
+            <button id="btn-admin-login" class="admin-btn alert-btn" style="width: 100%;">AUTENTICAR</button>
+            <div id="login-err-msg" style="color: #ff3333; margin-top: 15px; font-size: 0.8rem; display: none;">CÓDIGO
+                INVÁLIDO. ACCESO DENEGADO.</div>
+        </div>
+    </div>
+
+    <header class="admin-header" style="display: none;" id="main-admin-header">
+        <h1>[ MANDO CENTRAL ] - PANEL DE SUPERVISIÓN ALPHA</h1>
+        <div style="text-align: right;">
+            <div id="mission-timer"
+                style="font-size: 1.5rem; color: #ff3333; font-weight: bold; font-family: 'Courier New', monospace;">
+                00:00:00</div>
+            <div class="status-badge">CONEXIÓN ESTABLECIDA</div>
+            <button class="admin-btn small-btn" style="margin-top: 10px; border-color: #555; color: #888;"
+                onclick="cerrarSesionAdmin()">[ CERRAR SESIÓN ]</button>
+        </div>
+    </header>
+
+    <div class="admin-layout" style="display: none;" id="main-admin-layout">
+        <!-- Panel Izquierdo: Estado de la Operación y Agentes -->
+        <div class="left-panel">
+            <div class="panel-section">
+                <!-- Estado Global de la Misión -->
+                <div id="mission-status-card"
+                    style="border: 1px dashed #ffff33; background: rgba(255, 255, 51, 0.05); margin-bottom: 20px; padding: 15px; border-radius: 8px;">
+                    <h2 style="color: #ffff33; margin: 0 0 10px 0; font-size: 1.1rem;">📡 ESTADO DE LA OPERACIÓN</h2>
+                    <div id="mission-status-text" style="font-weight: bold; color: #fff;">ESPERANDO INICIO...</div>
+                    <div id="mission-start-time" style="font-size: 0.8rem; color: #aaa; margin-top: 5px;">TIEMPO:
+                        --:--:--</div>
+                </div>
+
+                <!-- Registro Detallado de Misiones -->
+                <div id="missions-log-card"
+                    style="border: 1px solid #33ff33; background: rgba(51, 255, 51, 0.05); margin-bottom: 20px; padding: 15px; border-radius: 8px;">
+                    <h2 style="color: #33ff33; margin: 0 0 10px 0; font-size: 1.1rem;">📊 REGISTRO DE MISIONES</h2>
+                    <div id="log-mision-inicio" style="font-size: 0.85rem; margin-bottom: 8px; color: #aaa;">
+                        <span style="color: #33ff33;">[INICIO OPERACIÓN]</span> <span
+                            id="val-mision-inicio">--:--:--</span>
+                    </div>
+                    <div id="log-mision-1" style="font-size: 0.85rem; margin-bottom: 8px; color: #aaa;">
+                        <span id="label-mision-1" style="color: #888;">[MISIÓN 1: ASCENSO]</span> <span
+                            id="val-mision-1">PENDIENTE</span>
+                    </div>
+                    <div id="log-mision-2" style="font-size: 0.85rem; margin-bottom: 8px; color: #aaa;">
+                        <span id="label-mision-2" style="color: #888;">[MISIÓN 2: INMERSIÓN]</span> <span
+                            id="val-mision-2">BLOQUEADA</span>
+                    </div>
+                    <div id="log-mision-final"
+                        style="font-size: 0.85rem; color: #aaa; margin-top: 10px; border-top: 1px solid #333; padding-top: 8px;">
+                        <span style="color: #ff3333;">[FIN OPERACIÓN]</span> <span id="val-mision-final">--:--:--</span>
+                    </div>
+                </div>
+
+                <h2>📋 REPORTE DE ESCUADRÓN</h2>
+                <p
+                    style="color: #aaa; font-size: 0.85rem; padding-bottom: 10px; border-bottom: 1px dashed #333; margin-bottom: 15px;">
+                    Estado actual de los agentes registrados y controles manuales.
+                </p>
+
+                <!-- Formulario Añadir Agente -->
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                    <input type="text" id="new-agent-name" placeholder="Nombre (Ej. ALPHA)"
+                        style="flex: 1; min-width: 0; background: transparent; border: 1px solid #00ffcc; color: #00ffcc; padding: 10px; outline: none;">
+                    <input type="text" id="new-agent-code" placeholder="Código (Ej. AG-05)"
+                        style="flex: 1; min-width: 0; background: transparent; border: 1px solid #00ffcc; color: #00ffcc; padding: 10px; outline: none;">
+                    <button class="admin-btn" id="btn-add-agent" style="border-color: #33ff33; color: #33ff33;">+
+                        AÑADIR</button>
+                </div>
+                <div id="agents-list" class="agents-grid">
+                    <div style="color: #00ffcc;">INTERCEPTANDO SEÑALES DE AGENTES...</div>
+                </div>
+            </div>
+
+            <!-- Configuración de la Cita -->
+            <div class="panel-section" style="margin-top: 20px; border-color: #ffaa00;">
+                <h2 style="color: #ffaa00; margin-bottom: 10px; font-size: 1.1rem;">📅 CONFIGURACIÓN DE CITA</h2>
+                <p style="color: #aaa; font-size: 0.8rem; margin-bottom: 10px;">Día y hora que verán los agentes al
+                    validarse.</p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <input type="text" id="cfg-cita-dia" placeholder="Ej: SÁBADO 25 DE MARZO"
+                        style="background: transparent; border: 1px solid #ffaa00; color: #ffaa00; padding: 10px; outline: none;">
+                    <input type="text" id="cfg-cita-hora" placeholder="Ej: 18:00 HORAS"
+                        style="background: transparent; border: 1px solid #ffaa00; color: #ffaa00; padding: 10px; outline: none;">
+                    <button class="admin-btn" id="btn-save-cita"
+                        style="border-color: #ffaa00; color: #ffaa00;">ACTUALIZAR CITA</button>
+                </div>
+            </div>
+
+            <div class="panel-section" style="margin-top: 20px; border-color: #ffaa00;">
+                <h2 style="color: #ffaa00;">⚙️ CONTROLES DEL SISTEMA</h2>
+                <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 10px;">Botones útiles para el control de la
+                    partida.</p>
+                <button id="btn-reset-messages" class="admin-btn alert-btn">BARRER COMUNICACIONES (BORRAR CHAT)</button>
+                <button id="btn-toggle-pause" class="admin-btn alert-btn"
+                    style="margin-top: 10px; border-color: #ffff33; color: #ffff33;">⏸️ PAUSAR OPERACIÓN</button>
+                <button id="btn-full-reset" class="admin-btn alert-btn"
+                    style="margin-top: 10px; background: rgba(255, 51, 51, 0.1);">☢️ RESET TOTAL DE LA
+                    OPERACIÓN</button>
+                <p style="color: #ff3333; font-size: 0.75rem; margin-top: 5px;">* Precaución: El reset total devolverá a
+                    todos los agentes al inicio y limpiará el tiempo y el chat.</p>
+            </div>
+        </div>
+
+        <!-- Panel Derecho: Comunicaciones -->
+        <div class="right-panel">
+            <div class="panel-section chat-section">
+                <h2>☎️ CANAL DE EMERGENCIA</h2>
+                <div id="chat-messages" class="chat-messages">
+                    <!-- Mensajes inyectados -->
+                    <div class="msg-sys">[ INICIALIZANDO CANAL DE ENLACE SEGURO... ]</div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Escriba aquí sus directrices para los agentes..."
+                        autocomplete="off">
+                    <button id="btn-send-chat" class="admin-btn btn-primary">ENVIAR ORDEN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- Eliminado footer para recuperar altura completa del layout -->
+
+    <!-- Firebase y Lógica del Admin -->
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="admin.js"></script>
+</body>
+
+</html>
