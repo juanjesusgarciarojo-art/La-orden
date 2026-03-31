@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Orden - Operación Quimera</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+</head>
+
+<body style="background-color: #000; color: #00ffcc; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 0;">
+
+    <div id="agency-container" style="display: block;">
+        <header class="agency-header">
+            <div class="header-left">
+                <img src="escudo.png" alt="Escudo" class="agency-logo-small">
+                <h1>LA ORDEN</h1>
+            </div>
+
+            <div class="timer-container">
+                <span id="countdown-timer">00:00:00</span>
+            </div>
+
+            <div class="status-indicator" style="display: flex; align-items: center; gap: 20px;">
+                <div><span class="pulse-dot"></span> CONNECTION: <span style="color: #ff0044;">SECURE L3</span></div>
+                <button class="agency-btn btn-finish" onclick="window.location.href='index.html'">
+                    <span>⬅</span> VOLVER A BASE
+                </button>
+            </div>
+        </header>
+
+        <div class="agency-layout">
+            <!-- Sidebar Navigation -->
+            <aside class="agency-sidebar glass-panel">
+                <nav class="agency-nav">
+                    <button class="nav-btn" onclick="window.location.href='index.html'">
+                        <span class="nav-icon">⎈</span> PANEL CENTRAL
+                    </button>
+                    <button class="nav-btn" onclick="window.location.href='index.html?tab=archivos'">
+                        <span class="nav-icon">▤</span> ARCHIVOS CLASIFICADOS
+                    </button>
+                    <button class="nav-btn" onclick="window.location.href='index.html?tab=comunicaciones'">
+                        <span class="nav-icon">☎</span> CUARTEL GENERAL
+                    </button>
+                </nav>
+                <div class="agent-stats-container">
+                    <div class="radar-panel">
+                        <div class="radar-box">
+                            <div class="radar-grid"></div>
+                            <div class="radar-sweep"></div>
+                            <div class="radar-dot d1"></div>
+                            <div class="radar-dot d2"></div>
+                            <div class="radar-dot d3"></div>
+                        </div>
+                        <div class="radar-coords" id="radar-coords">
+                            <span class="rc rc1" id="rc1"></span>
+                            <span class="rc rc2" id="rc2"></span>
+                            <span class="rc rc3" id="rc3"></span>
+                        </div>
+                    </div>
+                    <div class="agent-stats">
+                        <p>STATUS: <span style="color: #ff3333;">TOP SECRET</span></p>
+                        <p>PRIORIDAD: <span style="color: #ff0044;">MÁXIMA</span></p>
+                        <p>CANAL: <span id="connected-agents">QUIMERA_ALPHA</span></p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="agency-content glass-panel" style="border-color: #ff0044;">
+
+                <div id="tab-dashboard" class="tab-content active-tab" style="display: block;">
+                    <button class="agency-btn small-btn" onclick="window.location.href='index.html?tab=archivos'" style="margin-bottom: 20px; border-color: #ff0044; color: #ff0044;">⬅ VOLVER</button>
+                    
+                    <h2 style="color: #ff0044; text-transform: uppercase; letter-spacing: 4px;">◈ OPERACIÓN QUIMERA ◈</h2>
+                    <p style="color: #888; font-style: italic;">Acceso concedido. Nivel de seguridad: ALFA-VIOLETA.</p>
+                    
+                    <div class="mission-details" style="border-left-color: #ff0044; background: rgba(255, 0, 68, 0.05); margin-top: 15px; margin-bottom: 25px;">
+                        <h3 style="color: #ff0044;">INSTRUCCIONES CLASIFICADAS:</h3>
+                        <p>[Aquí incluiremos la información, desafíos y acertijos complejos de la Misión Quimera.]</p>
+                        <p>Agentes, esta fase de la operación requiere una sincronización perfecta. No dejen rastro.</p>
+                    </div>
+
+                    <div style="margin-bottom: 30px; margin-top: 20px; text-align: center;">
+                        <div style="border: 1px dashed #ff0044; padding: 40px; color: #ff0044;">
+                            <span style="font-size: 2rem;">[ DATOS CIFRADOS ]</span>
+                            <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">SINCRONIZANDO CON EL CUARTEL GENERAL PARA REVELAR OBJETIVOS...</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Operación Pausada Overlay -->
+    <div id="pause-overlay"
+        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 20000; display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; font-family: 'Courier New', monospace;">
+        <h1 style="color: #ffff33; text-shadow: 0 0 15px #ffff33; margin-bottom: 20px;">[ OPERACIÓN EN PAUSA ]</h1>
+        <p style="color: #aaa; max-width: 350px; line-height: 1.6;">EL MANDO CENTRAL HA DETENIDO TEMPORALMENTE LA MISIÓN POR MOTIVOS DE SEGURIDAD.</p>
+        <div style="margin-top: 30px; border: 1px dashed #ffff33; padding: 15px; color: #ffff33; width: 80%; max-width: 400px;">
+            <div style="font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #ffff33; padding-bottom: 5px;">☎️ CANAL DE EMERGENCIA HQ</div>
+            <div id="pause-chat-messages" style="height: 150px; overflow-y: auto; text-align: left; font-size: 0.85rem; margin-bottom: 10px; padding: 5px; background: rgba(255, 255, 51, 0.05);"></div>
+            <div style="display: flex; gap: 5px;">
+                <input type="text" id="pause-chat-input" placeholder="Responder al mando..." style="flex: 1; background: transparent; border: 1px solid #ffff33; color: #ffff33; padding: 8px; outline: none; font-family: inherit;">
+                <button id="btn-pause-send" style="background: #ffff33; color: #000; border: none; padding: 0 15px; font-weight: bold; cursor: pointer;">ENVIAR</button>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { db } from './firebase.js';
+        import { doc, onSnapshot, collection, query, orderBy, limit, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const GROUP_ID = "grupo_activo";
+        let timerPaused = false;
+        let timerInterval = null;
+
+        // --- LÓGICA DE PAUSA Y SINCRONIZACIÓN ---
+        function setupPauseSystem() {
+            const pauseOverlay = document.getElementById('pause-overlay');
+            const groupRef = doc(db, "grupos", GROUP_ID);
+            const timerElement = document.getElementById('countdown-timer');
+
+            onSnapshot(groupRef, (snapshot) => {
+                if (!snapshot.exists()) return;
+                const data = snapshot.data();
+                
+                // 1. Gestión de Pausa Visual y Bloqueo
+                if (data.pausado) {
+                    timerPaused = true;
+                    if (pauseOverlay) pauseOverlay.style.display = "flex";
+                    if (timerInterval) clearInterval(timerInterval);
+                    if (timerElement) timerElement.style.color = "#888";
+                } else {
+                    timerPaused = false;
+                    if (pauseOverlay) pauseOverlay.style.display = "none";
+                    if (timerElement) timerElement.style.color = "#ff3333";
+
+                    // 2. Sincronizar Cronómetro (Mismo algoritmo que app.js)
+                    if (data.tiempo_inicio) {
+                        let extraMs = data.energia_reclamada ? (10 * 60 * 1000) : 0;
+                        const duration = (2 * 60 * 60 * 1000) + extraMs;
+                        const calculatedEnd = data.tiempo_inicio.toDate().getTime() + duration;
+                        localStorage.setItem('timer_end_time', calculatedEnd);
+                        
+                        if (timerInterval) clearInterval(timerInterval);
+                        timerInterval = setInterval(updateTimer, 1000);
+                        updateTimer();
+                    }
+                }
+            });
+
+            // 3. Mini-Chat de Emergencia (Pausa)
+            const pauseInput = document.getElementById('pause-chat-input');
+            const btnPauseSend = document.getElementById('btn-pause-send');
+            const pauseMsgContainer = document.getElementById('pause-chat-messages');
+
+            if (btnPauseSend && pauseInput) {
+                btnPauseSend.onclick = async () => {
+                    const text = pauseInput.value.trim();
+                    if (text) {
+                        try {
+                            const messagesRef = collection(db, "grupos", GROUP_ID, "mensajes");
+                            await addDoc(messagesRef, {
+                                text: text,
+                                sender: "AGENTE",
+                                timestamp: serverTimestamp()
+                            });
+                            pauseInput.value = "";
+                        } catch (e) { console.error(e); }
+                    }
+                };
+                pauseInput.onkeypress = (e) => { if (e.key === 'Enter') btnPauseSend.click(); };
+            }
+
+            const q = query(collection(db, "grupos", GROUP_ID, "mensajes"), orderBy("timestamp", "asc"), limit(20));
+            onSnapshot(q, (snapshot) => {
+                if (pauseMsgContainer) {
+                    pauseMsgContainer.innerHTML = "";
+                    snapshot.forEach((doc) => {
+                        const m = doc.data();
+                        const div = document.createElement('div');
+                        div.style.marginBottom = "8px";
+                        const color = m.sender === "HQ" ? "#ffff33" : "#00ffcc";
+                        div.innerHTML = `<span style="color:${color}; font-weight:bold;">[${m.sender === "HQ" ? "HQ" : "AGENTE"}]</span> ${m.text}`;
+                        pauseMsgContainer.appendChild(div);
+                    });
+                    pauseMsgContainer.scrollTop = pauseMsgContainer.scrollHeight;
+                }
+            });
+        }
+
+        function updateTimer() {
+            if (timerPaused) return;
+            const timerElement = document.getElementById('countdown-timer');
+            if (!timerElement) return;
+
+            let endTime = localStorage.getItem('timer_end_time');
+            if (!endTime) return;
+            endTime = parseInt(endTime, 10);
+            
+            const now = Date.now();
+            const diff = endTime - now;
+
+            if (diff <= 0) {
+                const overTime = Math.abs(diff);
+                const oh = Math.floor(overTime / (1000 * 60 * 60));
+                const om = Math.floor((overTime % (1000 * 60 * 60)) / (1000 * 60));
+                const os = Math.floor((overTime % (1000 * 60)) / 1000);
+                timerElement.innerText = "+" + (oh<10?"0"+oh:oh) + ":" + (om<10?"0"+om:om) + ":" + (os<10?"0"+os:os);
+                timerElement.style.color = "#ffaa00";
+                return;
+            }
+
+            const h = Math.floor(diff / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            timerElement.innerText = (h<10?"0"+h:h) + ":" + (m<10?"0"+m:m) + ":" + (s<10?"0"+s:s);
+        }
+
+        // Decoración y Radar
+        function startRadarCoords() {
+            const slots = [
+                { el: document.getElementById('rc1'), delay: 500 },
+                { el: document.getElementById('rc2'), delay: 1200 },
+                { el: document.getElementById('rc3'), delay: 2500 },
+            ];
+            function randCoord() {
+                return (38 + Math.random() * 5).toFixed(4) + "N " + (-5 + Math.random() * -2).toFixed(4) + "W /" + Math.floor(Math.random() * 900 + 100) + "m";
+            }
+            slots.forEach(slot => {
+                if (!slot.el) return;
+                const cycle = () => {
+                    slot.el.textContent = randCoord();
+                    slot.el.classList.add('visible');
+                    setTimeout(() => slot.el.classList.remove('visible'), 1500);
+                    setTimeout(cycle, 2500 + Math.random() * 1000);
+                };
+                setTimeout(cycle, slot.delay);
+            });
+        }
+
+        // Arrancar
+        setupPauseSystem();
+        startRadarCoords();
+    </script>
+</body>
+
+</html>
