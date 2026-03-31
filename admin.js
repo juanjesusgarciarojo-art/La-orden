@@ -248,16 +248,41 @@ function escucharEstadoMision() {
                 document.getElementById('val-mision-1').style.color = "#33ff33";
                 document.getElementById('label-mision-1').style.color = "#33ff33";
 
-                // Si la 1 ha terminado, la 2 está en curso
-                if (!data.mision2_fin) {
+                // Si la 1 ha terminado
+                if (data.mision2_fin) {
+                    const m2End = data.mision2_fin.toDate();
+                    document.getElementById('val-mision-2').textContent = `FINALIZADA (${m2End.toLocaleTimeString()})`;
+                    document.getElementById('val-mision-2').style.color = "#33ff33";
+                    document.getElementById('label-mision-2').style.color = "#33ff33";
+
+                    // Si la 2 ha terminado
+                    if (data.mision_quimera_fin) {
+                        const m3End = data.mision_quimera_fin.toDate();
+                        document.getElementById('val-mision-3').textContent = `FINALIZADA (${m3End.toLocaleTimeString()})`;
+                        document.getElementById('val-mision-3').style.color = "#ff0044";
+                        document.getElementById('label-mision-3').style.color = "#ff0044";
+                    } else {
+                        document.getElementById('val-mision-3').textContent = "EN CURSO...";
+                        document.getElementById('val-mision-3').style.color = "#ffff33";
+                        document.getElementById('label-mision-3').style.color = "#ffff33";
+                    }
+                } else {
                     document.getElementById('val-mision-2').textContent = "EN CURSO...";
                     document.getElementById('val-mision-2').style.color = "#ffff33";
                     document.getElementById('label-mision-2').style.color = "#ffff33";
+                    
+                    document.getElementById('val-mision-3').textContent = "BLOQUEADA";
+                    document.getElementById('val-mision-3').style.color = "#888";
+                    document.getElementById('label-mision-3').style.color = "#888";
                 }
             } else {
                 document.getElementById('val-mision-1').textContent = "EN CURSO...";
                 document.getElementById('val-mision-1').style.color = "#ffff33";
                 document.getElementById('label-mision-1').style.color = "#ffff33";
+
+                // El resto bloqueadas
+                document.getElementById('val-mision-2').textContent = "BLOQUEADA";
+                document.getElementById('val-mision-3').textContent = "BLOQUEADA";
             }
 
             // Fin de Operación
@@ -552,6 +577,9 @@ function configurarEventosGrupales() {
                     tiempo_inicio: null,
                     tiempo_fin: null,
                     mision1_fin: null,
+                    mision2_fin: null,
+                    mision_quimera_fin: null,
+                    energia_reclamada: false,
                     pausado: false,
                     pausa_inicio: null,
                     activo: true
