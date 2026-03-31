@@ -107,7 +107,7 @@ function escucharPausaGlobal() {
 
             // Si hay un tiempo_inicio y estamos en la interfaz de agencia, actualizar y reanudar
             if (data.tiempo_inicio && localStorage.getItem('fase2_desbloqueada') === 'true') {
-                updateLocalEndTime(data.tiempo_inicio);
+                updateLocalEndTime(data);
 
                 // Re-iniciar el contador si estaba detenido
                 if (!window.agencyInterval) {
@@ -180,10 +180,12 @@ function setupPauseChat() {
     });
 }
 
-function updateLocalEndTime(firebaseTimestamp) {
-    const startTime = firebaseTimestamp.toDate().getTime();
+function updateLocalEndTime(data) {
+    if (!data.tiempo_inicio) return;
+    const startTime = data.tiempo_inicio.toDate().getTime();
     const TOTAL_TIME = 2 * 60 * 60 * 1000;
-    const newEndTime = startTime + TOTAL_TIME;
+    const extraMs = data.energia_reclamada ? (10 * 60 * 1000) : 0;
+    const newEndTime = startTime + TOTAL_TIME + extraMs;
     localStorage.setItem('timer_end_time', newEndTime.toString());
 }
 
@@ -673,13 +675,20 @@ function initTimer() {
     const timerElement = document.getElementById('countdown-timer');
     if (!timerElement) return;
 
-    // Calcular el tiempo
-    const TOTAL_TIME = 2 * 60 * 60 * 1000; // 2 horas en milisegundos
+    // Limpiar intervalo anterior si existe para evitar duplicados
+    if (window.agencyInterval) {
+        clearInterval(window.agencyInterval);
+        window.agencyInterval = null;
+    }
+
+    const TOTAL_TIME = 2 * 60 * 60 * 1000; 
     let endTime = localStorage.getItem('timer_end_time');
 
     if (!endTime) {
-        endTime = Date.now() + TOTAL_TIME;
-        localStorage.setItem('timer_end_time', endTime.toString());
+        // En lugar de inventar uno, intentamos esperar a que Firebase lo proporcione.
+        // Pero para no dejarlo vacío, ponemos un placeholder.
+        timerElement.innerText = "--:--:--";
+        return;
     } else {
         endTime = parseInt(endTime, 10);
     }
@@ -687,46 +696,30 @@ function initTimer() {
     function updateTimer() {
         const now = Date.now();
         const diff = endTime - now;
-
+        
+        // El resto del código de actualización se mantiene igual...
         if (diff <= 0) {
-            // Tiempo original expirado: empieza a sumar (tiempo en positivo)
             const overTime = Math.abs(diff);
-            const MAX_OVERTIME = 2 * 60 * 60 * 1000; // 2 horas extras máximo
-
+            const MAX_OVERTIME = 2 * 60 * 60 * 1000;
             if (overTime >= MAX_OVERTIME) {
                 timerElement.innerText = "+02:00:00";
-                return; // Detener conteo visual
+                return;
             }
-
             const oh = Math.floor(overTime / (1000 * 60 * 60));
             const om = Math.floor((overTime % (1000 * 60 * 60)) / (1000 * 60));
             const os = Math.floor((overTime % (1000 * 60)) / 1000);
-
-            const plusH = oh < 10 ? "0" + oh : oh;
-            const plusM = om < 10 ? "0" + om : om;
-            const plusS = os < 10 ? "0" + os : os;
-
-            timerElement.innerText = `+${plusH}:${plusM}:${plusS}`;
-            timerElement.style.color = "#ffaa00"; // un tono cálido o naranja para indicar overtime
-            timerElement.style.textShadow = "0 0 8px rgba(255, 170, 0, 0.6)";
+            timerElement.innerText = `+${oh < 10 ? "0" + oh : oh}:${om < 10 ? "0" + om : om}:${os < 10 ? "0" + os : os}`;
+            timerElement.style.color = "#ffaa00";
             return;
         }
 
-        // Cuenta regresiva normal
         const hours = Math.floor(diff / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        const h = hours < 10 ? "0" + hours : hours;
-        const m = minutes < 10 ? "0" + minutes : minutes;
-        const s = seconds < 10 ? "0" + seconds : seconds;
-
-        timerElement.innerText = `${h}:${m}:${s}`;
+        timerElement.innerText = `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
     }
 
-    // Ejecutar inmediatamente y luego cada segundo
     updateTimer();
-    // Guardar referencia si hace falta cancelar
     window.agencyInterval = setInterval(updateTimer, 1000);
 }
 

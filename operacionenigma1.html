@@ -153,7 +153,8 @@
                     timerElement.style.textShadow = "0 0 8px rgba(255, 51, 51, 0.6)";
                     
                     if (data.tiempo_inicio) {
-                        const duration = 2 * 60 * 60 * 1000;
+                        const extraMs = data.energia_reclamada ? (10 * 60 * 1000) : 0;
+                        const duration = (2 * 60 * 60 * 1000) + extraMs;
                         const calculatedEnd = data.tiempo_inicio.toDate().getTime() + duration;
                         localStorage.setItem('timer_end_time', calculatedEnd);
                         
