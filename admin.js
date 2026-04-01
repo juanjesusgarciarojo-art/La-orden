@@ -261,6 +261,16 @@ function escucharEstadoMision() {
                         document.getElementById('val-mision-3').textContent = `FINALIZADA (${m3End.toLocaleTimeString()})`;
                         document.getElementById('val-mision-3').style.color = "#ff0044";
                         document.getElementById('label-mision-3').style.color = "#ff0044";
+                    } else if (data.quimera_estado) {
+                        // Monitorizar el estado específico del hackeo
+                        document.getElementById('val-mision-3').textContent = `EN CURSO: ${data.quimera_estado}`;
+                        if (data.quimera_estado === "HACKEO EN CURSO") {
+                            document.getElementById('val-mision-3').style.color = "#ff3333";
+                            document.getElementById('label-mision-3').style.color = "#ff3333";
+                        } else {
+                            document.getElementById('val-mision-3').style.color = "#ffff33";
+                            document.getElementById('label-mision-3').style.color = "#ffff33";
+                        }
                     } else {
                         document.getElementById('val-mision-3').textContent = "EN CURSO...";
                         document.getElementById('val-mision-3').style.color = "#ffff33";
