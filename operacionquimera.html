@@ -347,7 +347,7 @@
             // Evitar correr el hackeo si el admin acaba de pausar la partida
             if (timerPaused) return;
 
-            // 2. Glitch y Sonido del intruso (5 segundos)
+            // 2. Glitch y Sonido del intruso (6 segundos, duración del audio del router)
             reportQuimeraStatus("HACKEO EN CURSO");
             const routerSound = document.getElementById('router-sound');
             if (routerSound) routerSound.play().catch(()=>{});
@@ -375,11 +375,12 @@
             const terminalText = document.getElementById('terminal-text');
             await typeTerminalText("> SISTEMA COMPROMETIDO.\n> BYPASS DE SEGURIDAD: ÉXITO.\n> PERSONAL DESCONOCIDO ESTÁ TOMANDO EL CONTROL...\n", terminalText, 50);
             
-            await sleep(2500); // Suspense esperando
+            // Suspense aumentado para mayor tensión (6s)
+            await sleep(6000); 
 
             // 4. Contraataque (Recovery)
             terminalText.innerHTML += "\n<span style='color:#ff0044'>> ALERTA: CONEXIÓN INTERVENIDA POR LA ORDEN. PROTOCOLO DE PURGA INICIADO...</span>";
-            await sleep(2000);
+            await sleep(4000); 
             
             terminalOverlay.style.display = 'none';
             const recoveryOverlay = document.getElementById('recovery-overlay');
