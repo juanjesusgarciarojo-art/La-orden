@@ -1068,3 +1068,9 @@ body::after {
         transform: translateX(-50%) scale(1.05);
     }
 }
+
+@keyframes pulse-purple {
+    0% { box-shadow: 0 0 5px rgba(191, 102, 255, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(191, 102, 255, 0.6); }
+    100% { box-shadow: 0 0 5px rgba(191, 102, 255, 0.2); }
+}

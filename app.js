@@ -1279,6 +1279,17 @@ function setupMision1Events() {
             if (e.key === 'Enter') btnConfirmarFinal?.click();
         });
     }
+
+    // Botón de acceso directo a la siguiente misión
+    const btnIrProxima = document.getElementById('btn-ir-a-inmersion');
+    if (btnIrProxima) {
+        btnIrProxima.addEventListener('click', () => {
+            if (mision1Content) mision1Content.classList.add('hidden-tab');
+            const inmersionContent = document.getElementById('mision-inmersion-content');
+            if (inmersionContent) inmersionContent.classList.remove('hidden-tab');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 }
 
 // --- MISIÓN EXTRA: ENERGÍA ---
