@@ -107,8 +107,75 @@ function initAdmin() {
     escucharAgentes();
     escucharChat();
     escucharEstadoMision();
-    configurarEventosGrupales(); // Assuming this function exists and should be called
+    escucharContactos(); // Nueva escucha para el formulario de la landing
+    configurarEventosGrupales();
 }
+
+/**
+ * 0. ESCUCHAR CONTACTOS (Mensajes de la Landing)
+ */
+function escucharContactos() {
+    const contactList = document.getElementById('contact-requests-list');
+    if (!contactList) return;
+
+    const contactsRef = collection(db, "contactos");
+    const q = query(contactsRef, orderBy("timestamp", "desc"), limit(50));
+
+    onSnapshot(q, (snapshot) => {
+        contactList.innerHTML = "";
+        if (snapshot.empty) {
+            contactList.innerHTML = '<div style="color: #666; font-size: 0.85rem;">SISTEMA LIMPIO. NO HAY SOLICITUDES PENDIENTES.</div>';
+            return;
+        }
+
+        snapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            const id = docSnap.id;
+            const time = data.timestamp ? data.timestamp.toDate().toLocaleString() : "--:--";
+
+            const card = document.createElement('div');
+            card.style.background = data.visto ? "rgba(255,255,255,0.03)" : "rgba(0,255,204,0.08)";
+            card.style.border = data.visto ? "1px solid #333" : "1px solid #00ffcc";
+            card.style.padding = "10px";
+            card.style.borderRadius = "4px";
+            card.style.fontSize = "0.85rem";
+
+            card.innerHTML = `
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <span style="color:#00ffcc; font-weight:bold;">${data.nombre || 'ANÓNIMO'}</span>
+                    <span style="color:#888; font-size:0.75rem;">${time}</span>
+                </div>
+                <div style="color:#fff; margin-bottom:8px; font-style:italic;">"${data.mensaje}"</div>
+                <div style="color:#aaa; font-size:0.8rem; margin-bottom:10px;">Enlace: <span style="color:#fff;">${data.email}</span></div>
+                <div style="display:flex; gap:5px;">
+                    <button class="admin-btn small-btn" onclick="toggleVistoContacto('${id}', ${data.visto})">
+                        ${data.visto ? '↩️ Marcar Nuevo' : '👁️ Archivar'}
+                    </button>
+                    <button class="admin-btn small-btn" style="color:#ff3333; border-color:#ff3333;" onclick="eliminarContacto('${id}')">BORRAR</button>
+                </div>
+            `;
+            contactList.appendChild(card);
+        });
+    });
+}
+
+window.toggleVistoContacto = async (id, current) => {
+    try {
+        await updateDoc(doc(db, "contactos", id), { visto: !current });
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+window.eliminarContacto = async (id) => {
+    if (confirm("¿Eliminar permanentemente este registro de contacto?")) {
+        try {
+            await deleteDoc(doc(db, "contactos", id));
+        } catch (e) {
+            console.error(e);
+        }
+    }
+};
 
 /**
  * 1. ESCUCHAR AGENTES (Integrantes de la Operación)
