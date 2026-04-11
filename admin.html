@@ -125,13 +125,6 @@
                     todos los agentes al inicio y limpiará el tiempo y el chat.</p>
             </div>
 
-            <div class="panel-section" style="margin-top: 20px; border-color: #00ffcc;">
-                <h2 style="color: #00ffcc; margin-bottom: 10px; font-size: 1.1rem;">📩 SOLICITUDES DE RECLUTAMIENTO</h2>
-                <p style="color: #aaa; font-size: 0.8rem; margin-bottom: 15px;">Mensajes recibidos desde la web pública.</p>
-                <div id="contact-requests-list" style="display: flex; flex-direction: column; gap: 10px; max-height: 400px; overflow-y: auto;">
-                    <div style="color: #888; font-size: 0.85rem;">ESPERANDO TRANSMISIONES...</div>
-                </div>
-            </div>
         </div>
 
         <!-- Panel Derecho: Comunicaciones -->
@@ -146,6 +139,13 @@
                     <input type="text" id="chat-input" placeholder="Escriba aquí sus directrices para los agentes..."
                         autocomplete="off">
                     <button id="btn-send-chat" class="admin-btn btn-primary">ENVIAR ORDEN</button>
+                </div>
+            </div>
+            <div class="panel-section" style="margin-top: 20px; border-color: #00ffcc; flex-shrink: 0;">
+                <h2 style="color: #00ffcc; margin-bottom: 10px; font-size: 1.1rem;">📩 SOLICITUDES DE RECLUTAMIENTO</h2>
+                <p style="color: #aaa; font-size: 0.8rem; margin-bottom: 15px;">Mensajes recibidos desde la web pública.</p>
+                <div id="contact-requests-list" style="display: flex; flex-direction: column; gap: 10px; max-height: 350px; overflow-y: auto;">
+                    <div style="color: #888; font-size: 0.85rem;">ESPERANDO TRANSMISIONES...</div>
                 </div>
             </div>
         </div>
