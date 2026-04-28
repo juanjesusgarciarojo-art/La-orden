@@ -516,15 +516,16 @@ async function handleGroupCode(code) {
         const grantedSound = document.getElementById('access-granted-sound');
         grantedSound?.play().catch(() => { });
 
+        // Guardar que la fase 2 ha sido desbloqueada localmente ANTES de Firebase
+        // para evitar que el onSnapshot dispare la pantalla de "Proceso Duplicado"
+        localStorage.setItem('fase2_desbloqueada', 'true');
+
         // Registrar inicio de la partida en Firebase
         if (!groupData.tiempo_inicio) {
             await updateDoc(groupRef, {
                 tiempo_inicio: serverTimestamp()
             });
         }
-
-        // Guardar que la fase 2 ha sido desbloqueada localmente
-        localStorage.setItem('fase2_desbloqueada', 'true');
 
         setTimeout(() => {
             showAgencyInterface();
