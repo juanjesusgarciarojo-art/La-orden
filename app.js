@@ -117,7 +117,40 @@ function escucharPausaGlobal() {
             }
         }
 
-        // 2. GESTIÓN DE PROCESO DUPLICADO (Evitar que varios metan la clave grupal)
+        // 2. GESTIÓN DE REINICIO DE SESIÓN (RESET TOTAL)
+        // Si no hay tiempo de inicio pero el agente cree que está en la fase 2 o validado, es que ha habido un reset.
+        const estaEnFase2 = localStorage.getItem('fase2_desbloqueada') === 'true';
+        const estaValidado = localStorage.getItem('agente_validado') !== null;
+        
+        if (!data.tiempo_inicio && (estaEnFase2 || estaValidado)) {
+            console.log("DETECTADO RESET TOTAL DESDE MANDO CENTRAL. Limpiando sistema...");
+            
+            // Limpiar TODO el progreso local
+            const keysToClear = [
+                'fase2_desbloqueada',
+                'mision1_completada',
+                'mision1_finalizada',
+                'inmersion_desbloqueada',
+                'mision2_completada',
+                'quimera_desbloqueada',
+                'mision_energia_completada',
+                'mision_quimera_finalizada',
+                'mision_final_completada',
+                'timer_end_time',
+                'agente_validado',
+                'qr_operacionenigma1',
+                'qr_operacionenigma2',
+                'qr_operacionenigma3'
+            ];
+            
+            keysToClear.forEach(key => localStorage.removeItem(key));
+            
+            // Redirigir al inicio o recargar para limpiar estado de memoria
+            window.location.reload();
+            return;
+        }
+
+        // 3. GESTIÓN DE PROCESO DUPLICADO (Evitar que varios metan la clave grupal)
         const duplicateOverlay = document.getElementById('duplicate-process-overlay');
         if (duplicateOverlay) {
             const yaDesbloqueado = localStorage.getItem('fase2_desbloqueada') === 'true';
