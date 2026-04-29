@@ -10,7 +10,8 @@
     <meta name="theme-color" content="#000000">
 </head>
 
-<body style="background-color: #000; color: #00ffcc; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 0;">
+<body
+    style="background-color: #000; color: #00ffcc; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 0;">
 
     <div id="agency-container" style="display: block;">
         <header class="agency-header">
@@ -86,42 +87,66 @@
             <main class="agency-content glass-panel">
 
                 <div id="tab-dashboard" class="tab-content active-tab" style="display: block;">
-                    <button class="agency-btn small-btn" onclick="window.location.href='index.html'" style="margin-bottom: 20px;">⬅ VOLVER</button>
-                    <h3 style="color: #00ffcc;">UBICACIÓN TÁCTICA DESCIFRADA</h3>
-                    
-                    <div class="mission-details" style="border-left-color: #00aaff; background: rgba(0, 170, 255, 0.05); margin-top: 15px; margin-bottom: 25px;">
-                        <h3 style="color: #00aaff;">INSTRUCCIONES DE CONTACTO</h3>
-                        <p>Diríjanse a las coordenadas siguientes y pregunten al agente de la recepción.</p>
+                    <button class="agency-btn small-btn" onclick="window.location.href='index.html'"
+                        style="margin-bottom: 20px;">⬅ VOLVER</button>
+
+                    <!-- VÍDEO DE INTRODUCCIÓN -->
+                    <div id="intro-video-container"
+                        style="margin-bottom: 20px; border: 1px solid #00ffcc; border-radius: 4px; overflow: hidden; background: #000;">
+                        <iframe id="intro-video" width="100%" height="315"
+                            src="https://www.youtube.com/embed/j9poNr1njQI?autoplay=1&mute=0"
+                            title="Transmisión Táctica" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
                     </div>
 
-                    <p>Coordenadas registradas de encuentro:</p>
-                    <h2 style="letter-spacing: 2px; color: #ffaa00;">40.66332236425756, -3.202151966802839</h2>
+                    <!-- CONTENIDO DE LA UBICACIÓN (Oculto inicialmente) -->
+                    <div id="location-details" style="display: none; animation: fadeIn 2s;">
+                        <h3 style="color: #00ffcc;">UBICACIÓN TÁCTICA DESCIFRADA</h3>
 
-                    <div style="margin-bottom: 30px; margin-top: 20px;">
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
-                            <button class="agency-btn small-btn" id="btn-toggle-mapa" style="flex: 1; border-color: #00ffcc; color: #00ffcc; min-width: 200px;" onclick="const m = document.getElementById('mapa-mision'); if(m.style.display==='none'){m.style.display='block'; this.innerText='[ OCULTAR MAPA SATELITAL ]';}else{m.style.display='none'; this.innerText='[ VER MAPA SATELITAL DE LA ORDEN ]';}">
-                                [ VER MAPA SATELITAL DE LA ORDEN ]
-                            </button>
-
-                            <a href="https://www.google.com/maps/search/?api=1&query=40.66332236425756,-3.202151966802839" target="_blank" class="agency-btn small-btn" style="flex: 1; border-color: #ff3333; color: #ff3333; background: rgba(255, 51, 51, 0.1); font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; min-width: 200px;">
-                                [ ⚠️ ENLAZAR CON NAVEGACIÓN CIVIL EXTERNA ]
-                            </a>
+                        <div class="mission-details"
+                            style="border-left-color: #00aaff; background: rgba(0, 170, 255, 0.05); margin-top: 15px; margin-bottom: 25px;">
+                            <h3 style="color: #00aaff;">INSTRUCCIONES DE CONTACTO</h3>
+                            <p>Diríjanse a las coordenadas siguientes y pregunten al agente de la recepción.</p>
                         </div>
 
-                        <div id="mapa-mision" style="display: none; width: 100%; height: 350px; border: 1px solid #00ffcc; border-radius: 4px; overflow: hidden; box-shadow: 0 0 15px rgba(0,255,204,0.2);">
-                            <iframe width="100%" height="100%" frameborder="0" style="border:0;" src="https://maps.google.com/maps?q=40.66332236425756,-3.202151966802839&t=&z=17&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                    </div>
+                        <p>Coordenadas registradas de encuentro:</p>
+                        <h2 style="letter-spacing: 2px; color: #ffaa00;">40.66332236425756, -3.202151966802839</h2>
 
-                    <div class="mission-details">
-                        <p>Desplácense físicamente hasta el punto indicado. El agente en vigilancia del perímetro espera vuestra llegada, no se demoren.</p>
-                    </div>
+                        <div style="margin-bottom: 30px; margin-top: 20px;">
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                                <button class="agency-btn small-btn" id="btn-toggle-mapa"
+                                    style="flex: 1; border-color: #00ffcc; color: #00ffcc; min-width: 200px;"
+                                    onclick="const m = document.getElementById('mapa-mision'); if(m.style.display==='none'){m.style.display='block'; this.innerText='[ OCULTAR MAPA SATELITAL ]';}else{m.style.display='none'; this.innerText='[ VER MAPA SATELITAL DE LA ORDEN ]';}">
+                                    [ VER MAPA SATELITAL DE LA ORDEN ]
+                                </button>
+
+                                <a href="https://www.google.com/maps/search/?api=1&query=40.66332236425756,-3.202151966802839"
+                                    target="_blank" class="agency-btn small-btn"
+                                    style="flex: 1; border-color: #ff3333; color: #ff3333; background: rgba(255, 51, 51, 0.1); font-weight: bold; text-decoration: none; display: flex; align-items: center; justify-content: center; min-width: 200px;">
+                                    [ ⚠️ ENLAZAR CON NAVEGACIÓN CIVIL EXTERNA ]
+                                </a>
+                            </div>
+
+                            <div id="mapa-mision"
+                                style="display: none; width: 100%; height: 350px; border: 1px solid #00ffcc; border-radius: 4px; overflow: hidden; box-shadow: 0 0 15px rgba(0,255,204,0.2);">
+                                <iframe width="100%" height="100%" frameborder="0" style="border:0;"
+                                    src="https://maps.google.com/maps?q=40.66332236425756,-3.202151966802839&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                                    allowfullscreen loading="lazy"></iframe>
+                            </div>
+                        </div>
+
+                        <div class="mission-details">
+                            <p>Desplácense físicamente hasta el punto indicado. El agente en vigilancia del perímetro
+                                espera vuestra llegada, no se demoren.</p>
+                        </div>
+                    </div> <!-- Fin de location-details -->
                 </div>
 
             </main>
         </div>
     </div>
-    
+
     <!-- Scripts mínimos para emular UI y temporizador -->
     <script type="module">
         import { db } from './firebase.js';
@@ -141,7 +166,7 @@
             onSnapshot(groupRef, (snapshot) => {
                 if (!snapshot.exists()) return;
                 const data = snapshot.data();
-                
+
                 if (data.pausado) {
                     timerPaused = true;
                     if (timerInterval) clearInterval(timerInterval);
@@ -151,13 +176,13 @@
                     timerPaused = false;
                     timerElement.style.color = "#ff3333";
                     timerElement.style.textShadow = "0 0 8px rgba(255, 51, 51, 0.6)";
-                    
+
                     if (data.tiempo_inicio) {
                         const extraMs = data.energia_reclamada ? (10 * 60 * 1000) : 0;
                         const duration = (2 * 60 * 60 * 1000) + extraMs;
                         const calculatedEnd = data.tiempo_inicio.toDate().getTime() + duration;
                         localStorage.setItem('timer_end_time', calculatedEnd);
-                        
+
                         if (timerInterval) clearInterval(timerInterval);
                         timerInterval = setInterval(updateTimer, 1000);
                         updateTimer();
@@ -180,7 +205,7 @@
                     const oh = Math.floor(overTime / (1000 * 60 * 60));
                     const om = Math.floor((overTime % (1000 * 60 * 60)) / (1000 * 60));
                     const os = Math.floor((overTime % (1000 * 60)) / 1000);
-                    timerElement.innerText = "+" + (oh<10?"0"+oh:oh) + ":" + (om<10?"0"+om:om) + ":" + (os<10?"0"+os:os);
+                    timerElement.innerText = "+" + (oh < 10 ? "0" + oh : oh) + ":" + (om < 10 ? "0" + om : om) + ":" + (os < 10 ? "0" + os : os);
                     timerElement.style.color = "#ffaa00";
                     return;
                 }
@@ -188,7 +213,7 @@
                 const h = Math.floor(diff / (1000 * 60 * 60));
                 const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 const s = Math.floor((diff % (1000 * 60)) / 1000);
-                timerElement.innerText = (h<10?"0"+h:h) + ":" + (m<10?"0"+m:m) + ":" + (s<10?"0"+s:s);
+                timerElement.innerText = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
             }
         }
         initTimer();
@@ -222,6 +247,21 @@
             setTimeout(randomizeAgents, 5000 + Math.random() * 5000);
         }
         randomizeAgents();
+
+        // --- LÓGICA DE RETARDO PARA EL VÍDEO INTRO ---
+        function setupIntroTimer() {
+            const videoCont = document.getElementById('intro-video-container');
+            const detailsCont = document.getElementById('location-details');
+
+            if (videoCont && detailsCont) {
+                setTimeout(() => {
+                    // Transición suave: ocultar vídeo y mostrar detalles
+                    videoCont.style.display = 'none';
+                    detailsCont.style.display = 'block';
+                }, 20000); // 20 segundos
+            }
+        }
+        setupIntroTimer();
     </script>
 </body>
 
