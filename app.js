@@ -121,7 +121,7 @@ function escucharPausaGlobal() {
         const duplicateOverlay = document.getElementById('duplicate-process-overlay');
         if (duplicateOverlay) {
             const yaDesbloqueado = localStorage.getItem('fase2_desbloqueada') === 'true';
-            
+
             // Si la misión ya empezó (tiempo_inicio existe) pero este dispositivo NO la desbloqueó
             if (data.tiempo_inicio && !yaDesbloqueado) {
                 duplicateOverlay.style.display = "flex";
@@ -225,8 +225,8 @@ async function handleVerify() {
 
             messageArea.textContent = "SISTEMA REINICIADO. RECARGANDO...";
             const dupOverlay = document.getElementById('duplicate-process-overlay');
-            if(dupOverlay) dupOverlay.style.display = "none";
-            
+            if (dupOverlay) dupOverlay.style.display = "none";
+
             setTimeout(() => location.reload(), 1500);
         } catch (err) {
             console.error(err);
@@ -438,7 +438,7 @@ async function pedirCodigoGrupo() {
 
     // Ponemos un vídeo de prueba de YouTube
     // Puedes cambiar la ID "dQw4w9WgXcQ" por la ID del vídeo final
-    videoContainer.innerHTML = `<iframe width="100%" height="315" style="max-width: 560px; border: 1px solid var(--text-color);" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Transmisión La Orden" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    videoContainer.innerHTML = `<iframe width="100%" height="315" style="max-width: 560px; border: 1px solid var(--text-color);" src="https://www.youtube.com/embed/AZrsSMQS0Ac" title="Transmisión La Orden" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 
     instructionLine.appendChild(videoContainer);
 
@@ -681,7 +681,7 @@ function initTimer() {
         window.agencyInterval = null;
     }
 
-    const TOTAL_TIME = 2 * 60 * 60 * 1000; 
+    const TOTAL_TIME = 2 * 60 * 60 * 1000;
     let endTime = localStorage.getItem('timer_end_time');
 
     if (!endTime) {
@@ -696,7 +696,7 @@ function initTimer() {
     function updateTimer() {
         const now = Date.now();
         const diff = endTime - now;
-        
+
         // El resto del código de actualización se mantiene igual...
         if (diff <= 0) {
             const overTime = Math.abs(diff);
@@ -926,9 +926,9 @@ function setupMisionInmersionEvents() {
             // Código por defecto para la misión 2: PROFUNDIDAD
             if (code === "PROFUNDIDAD") {
                 localStorage.setItem('mision2_completada', 'true');
-                
+
                 const granted = document.getElementById('access-granted-sound');
-                granted?.play().catch(() => {});
+                granted?.play().catch(() => { });
 
                 if (panelFinal) panelFinal.style.display = 'none';
                 if (successPanel) successPanel.classList.remove('hidden-tab');
@@ -941,10 +941,10 @@ function setupMisionInmersionEvents() {
                 try {
                     const groupRef = doc(db, "grupos", GROUP_ID);
                     updateDoc(groupRef, { mision2_fin: serverTimestamp() });
-                } catch(e) {}
+                } catch (e) { }
             } else {
                 const denied = document.getElementById('access-denied-sound');
-                denied?.play().catch(() => {});
+                denied?.play().catch(() => { });
                 if (errorMsg) {
                     errorMsg.textContent = "✘ CÓDIGO DE CIERRE INVÁLIDO";
                     setTimeout(() => errorMsg.textContent = "", 2500);
@@ -970,7 +970,7 @@ function setupMisionQuimeraEvents() {
 
         if (lockArea) lockArea.style.display = 'none';
         if (btnAbrir) btnAbrir.style.display = 'inline-block';
-        
+
         iconEl.innerHTML = '&#128275;'; // Abierto
         statusEl.textContent = 'AUTORIZADO';
         statusEl.style.color = '#ff0044';
@@ -1461,7 +1461,7 @@ function setupQRScannerEvents() {
                 html5QrCode.stop().catch(() => { });
 
                 const codigo = decodedText.trim().toLowerCase();
-                
+
                 if (codigo === "operacionenigma1") {
                     window.location.href = "operacionenigma1.html";
                     return;
