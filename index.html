@@ -250,7 +250,7 @@
                             <!-- Reproductor de vídeo para misión 1 -->
                             <div id="mision-1-video-container"
                                 style="margin-bottom: 20px; border: 1px solid #ff3333; overflow: hidden; border-radius: 4px; display: none;">
-                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                                <iframe width="100%" height="250" src="https://www.youtube.com/embed/RLOz9Z1xH9s"
                                     title="Transmisión Operación Ascenso" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                     allowfullscreen>
@@ -286,7 +286,7 @@
                                     ALFA CONCEDIDO</p>
                                 <p style="color:#bf66ff; font-size: 0.85rem;">La "OPERACIÓN INMERSIÓN" ha sido
                                     desencriptada en su terminal de archivos.</p>
-                                <button class="agency-btn" id="btn-ir-a-inmersion" 
+                                <button class="agency-btn" id="btn-ir-a-inmersion"
                                     style="margin-top: 15px; border-color: #bf66ff; color: #bf66ff; width: 100%; animation: pulse-purple 2s infinite;">
                                     [ ACCEDER AHORA A OPERACIÓN INMERSIÓN ]
                                 </button>
@@ -303,13 +303,17 @@
                         <div class="mission-details"
                             style="border-left-color: #7700ff; background: rgba(119, 0, 255, 0.05);">
                             <h3 style="color: #7700ff;">PROTOCOLO DE ACCESO: OPERACIÓN INMERSIÓN</h3>
-                            <p style="color: #aaa;">Para completar esta fase y sincronizar los datos con la Operación Quimera, deben introducir la clave de seguridad recuperada durante su despliegue.</p>
-                            <p style="color: #7700ff; font-style: italic; margin-top: 12px;">Acceso concedido. Bienvenidos al segundo nivel de la operación.</p>
+                            <p style="color: #aaa;">Para completar esta fase y sincronizar los datos con la Operación
+                                Quimera, deben introducir la clave de seguridad recuperada durante su despliegue.</p>
+                            <p style="color: #7700ff; font-style: italic; margin-top: 12px;">Acceso concedido.
+                                Bienvenidos al segundo nivel de la operación.</p>
                         </div>
 
                         <!-- Panel de Finalización de Inmersión -->
-                        <div id="mision-inmersion-finish-panel" style="margin-top: 30px; padding: 20px; border: 1px solid #7700ff; border-radius: 4px; background: rgba(119, 0, 255, 0.05);">
-                            <p style="text-align: center; color: #bf66ff; margin-bottom: 15px;">INTRODUZCA CÓDIGO DE CIERRE (LEVEL 2):</p>
+                        <div id="mision-inmersion-finish-panel"
+                            style="margin-top: 30px; padding: 20px; border: 1px solid #7700ff; border-radius: 4px; background: rgba(119, 0, 255, 0.05);">
+                            <p style="text-align: center; color: #bf66ff; margin-bottom: 15px;">INTRODUZCA CÓDIGO DE
+                                CIERRE (LEVEL 2):</p>
                             <input type="text" id="codigo-finalizar-inmersion" placeholder="CÓDIGO DE INMERSIÓN"
                                 autocorrect="off" autocapitalize="characters" spellcheck="false"
                                 style="width: 100%; padding: 12px; background: transparent; border: 1px solid #7700ff; color: #bf66ff; font-family: inherit; text-align: center; text-transform: uppercase; margin-bottom: 10px;">
@@ -317,128 +321,130 @@
                                 style="width: 100%; border-color: #7700ff; color: #7700ff;">
                                 VALIDAR Y DESBLOQUEAR SIGUIENTE NIVEL
                             </button>
-                            <p id="error-finalizar-inmersion" style="color: #ff3333; font-size: 0.8rem; margin-top: 10px; text-align: center;"></p>
+                            <p id="error-finalizar-inmersion"
+                                style="color: #ff3333; font-size: 0.8rem; margin-top: 10px; text-align: center;"></p>
                         </div>
 
                         <!-- Éxito Misión 2 -->
-                        <div id="mision-inmersion-success" class="hidden-tab" style="margin-top: 30px; border-top: 1px solid #33ff33; padding-top: 20px;">
+                        <div id="mision-inmersion-success" class="hidden-tab"
+                            style="margin-top: 30px; border-top: 1px solid #33ff33; padding-top: 20px;">
                             <h3 style="color: #33ff33;">&#9745; OPERACIÓN INMERSIÓN: COMPLETADA</h3>
                             <p>Datos sincronizados. La Operación Quimera ha sido autorizada en su terminal.</p>
                         </div>
-                            <p style="color: #7700ff; font-style: italic; margin-top: 12px;">Acceso concedido.
-                                Bienvenidos al siguiente nivel de la operación.</p>
-                        </div>
-                    </div>
-
-                    <!-- Contenido Misión de Suministros (Energía) -->
-                    <div id="mision-energia-content" class="hidden-tab">
-                        <button class="agency-btn small-btn" id="btn-volver-archivos-energia"
-                            style="margin-bottom: 20px; border-color: #ffaa00; color: #ffaa00;">⬅ VOLVER</button>
-                        <h3 style="color: #ffaa00;">REABASTECIMIENTO DETECTADO [OPCIONAL]</h3>
-
-                        <div class="mission-details"
-                            style="border-left-color: #ffaa00; background: rgba(255, 170, 0, 0.05);">
-                            <h3 style="color: #ffaa00;">BATERÍA DE EMERGENCIA</h3>
-                            <p>Agentes, hemos detectado que sus dispositivos móviles podrían quedarse sin energía antes
-                                de finalizar la operación. Hemos ocultado un núcleo de energía (powerbank) portátil.</p>
-                            <p>Esta misión es completamente opcional, pero proveerá la carga necesaria. Además, reportar
-                                su obtención al servidor nos permitirá adaptar los cálculos de tiempo estimado.</p>
-                            <p style="color: #ffaa00; font-style: italic;">[AÑADIR AQUÍ PISTA ACERCA DE DÓNDE ESTÁ
-                                ESCONDIDA LA BATERÍA EXTRA]</p>
-                        </div>
-
-                        <p style="margin-top: 20px;">Si la encuentras, introduce el CÓDIGO grabado en el paquete para
-                            registrarla y recibir tiempo extra:</p>
-                        <input type="text" id="codigo-energia" class="highlight-code-input"
-                            placeholder="CÓDIGO DE SUMINISTRO" autocorrect="off"
-                            style="width: 100%; padding: 10px; background: transparent; border: 2px solid #ffaa00; color: #ffaa00; text-transform: uppercase; margin-bottom: 15px;"
-                            maxlength="10">
-                        <button class="agency-btn" id="btn-reclamar-energia"
-                            style="width: 100%; border-color: #ffaa00; color: #ffaa00;">VALIDAR SUMINISTRO</button>
-                        <p id="energia-status" style="margin-top: 15px; color: #ff3333; text-align: center;"></p>
-                    </div>
-
-                    <!-- Contenido Escáner QR -->
-                    <div id="mision-qr-content" class="hidden-tab">
-
-                        <button class="agency-btn small-btn" id="btn-volver-archivos-qr"
-                            style="margin-bottom: 20px; border-color: #00aaff; color: #00aaff;">⬅ VOLVER</button>
-                        <h3 style="color: #00aaff;">ESCÁNER QR — INTELIGENCIA DE CAMPO</h3>
-
-                        <div class="mission-details"
-                            style="border-left-color: #00aaff; background: rgba(0, 170, 255, 0.05); margin-bottom: 25px;">
-                            <p>Los agentes de La Orden han ocultado marcadores cifrados en el campo de operaciones.
-                                Apunte el escáner hacia el código QR para descifrar la información de inteligencia
-                                asociada.</p>
-                        </div>
-
-                        <div id="qr-scanner-area" style="width: 100%; max-width: 400px; margin: 0 auto 20px auto;">
-                            <div id="qr-reader"
-                                style="border: 2px solid #00aaff; border-radius: 6px; overflow: hidden;"></div>
-                            <div id="qr-scan-status"
-                                style="text-align: center; margin-top: 10px; color: #00aaff; font-size: 0.9rem;">CÁMARA
-                                INICIALIZANDO...</div>
-                        </div>
-
-                        <!-- Área donde aparece la pista descifrada -->
-                        <div id="qr-result-panel" class="hidden-tab"
-                            style="margin-top: 20px; border: 1px solid #00aaff; padding: 20px; border-radius: 6px; background: rgba(0,170,255,0.05);">
-                            <h4 style="color: #00aaff; margin-bottom: 10px;">▶ TRANSMISIÓN DESCIFRADA:</h4>
-                            <p id="qr-result-text" style="color: #fff; line-height: 1.8;"></p>
-                            <button class="agency-btn small-btn" id="btn-reescanear"
-                                style="border-color: #00aaff; color: #00aaff; margin-top: 15px;">↺ ESCANEAR OTRO
-                                CÓDIGO</button>
-                        </div>
-
-                        <div id="qr-unknown-panel" class="hidden-tab"
-                            style="margin-top: 20px; border: 1px solid #ff3333; padding: 20px; border-radius: 6px; background: rgba(255,51,51,0.05);">
-                            <h4 style="color: #ff3333;">⚠ CÓDIGO NO AUTORIZADO</h4>
-                            <p id="qr-unknown-text" style="color: #aaa;"></p>
-                            <button class="agency-btn small-btn" id="btn-reescanear-error"
-                                style="border-color: #ff3333; color: #ff3333; margin-top: 15px;">↺ INTENTAR DE
-                                NUEVO</button>
-                        </div>
+                        <p style="color: #7700ff; font-style: italic; margin-top: 12px;">Acceso concedido.
+                            Bienvenidos al siguiente nivel de la operación.</p>
                     </div>
                 </div>
 
-                <!-- Tab: Red Global -->
-                <div id="tab-red-global" class="tab-content hidden-tab">
-                    <h2>RED DE INTELIGENCIA GLOBAL</h2>
-                    <p style="color: #aaa; margin-bottom: 20px;">INTERCEPTANDO COMUNICACIONES DE OTRAS UNIDADES...</p>
+                <!-- Contenido Misión de Suministros (Energía) -->
+                <div id="mision-energia-content" class="hidden-tab">
+                    <button class="agency-btn small-btn" id="btn-volver-archivos-energia"
+                        style="margin-bottom: 20px; border-color: #ffaa00; color: #ffaa00;">⬅ VOLVER</button>
+                    <h3 style="color: #ffaa00;">REABASTECIMIENTO DETECTADO [OPCIONAL]</h3>
 
-                    <div class="live-feed-container" id="live-feed">
-                        <!-- JS injected fake events -->
+                    <div class="mission-details"
+                        style="border-left-color: #ffaa00; background: rgba(255, 170, 0, 0.05);">
+                        <h3 style="color: #ffaa00;">BATERÍA DE EMERGENCIA</h3>
+                        <p>Agentes, hemos detectado que sus dispositivos móviles podrían quedarse sin energía antes
+                            de finalizar la operación. Hemos ocultado un núcleo de energía (powerbank) portátil.</p>
+                        <p>Esta misión es completamente opcional, pero proveerá la carga necesaria. Además, reportar
+                            su obtención al servidor nos permitirá adaptar los cálculos de tiempo estimado.</p>
+                        <p style="color: #ffaa00; font-style: italic;">[AÑADIR AQUÍ PISTA ACERCA DE DÓNDE ESTÁ
+                            ESCONDIDA LA BATERÍA EXTRA]</p>
                     </div>
+
+                    <p style="margin-top: 20px;">Si la encuentras, introduce el CÓDIGO grabado en el paquete para
+                        registrarla y recibir tiempo extra:</p>
+                    <input type="text" id="codigo-energia" class="highlight-code-input"
+                        placeholder="CÓDIGO DE SUMINISTRO" autocorrect="off"
+                        style="width: 100%; padding: 10px; background: transparent; border: 2px solid #ffaa00; color: #ffaa00; text-transform: uppercase; margin-bottom: 15px;"
+                        maxlength="10">
+                    <button class="agency-btn" id="btn-reclamar-energia"
+                        style="width: 100%; border-color: #ffaa00; color: #ffaa00;">VALIDAR SUMINISTRO</button>
+                    <p id="energia-status" style="margin-top: 15px; color: #ff3333; text-align: center;"></p>
                 </div>
 
-                <!-- Tab: Enlace HQ (Chat) -->
-                <div id="tab-comunicaciones" class="tab-content hidden-tab">
-                    <h2 style="color: #ff3333;">CANAL DE EMERGENCIA ALPHA — CUARTEL GENERAL</h2>
-                    <p style="color: #aaa; margin-bottom: 20px;">ENLACE DIRECTO CON EL MANDO CENTRAL DE LA ORDEN.</p>
+                <!-- Contenido Escáner QR -->
+                <div id="mision-qr-content" class="hidden-tab">
 
-                    <div id="chat-container" class="glass-panel"
-                        style="height: calc(100vh - 350px); min-height: 300px; display: flex; flex-direction: column; border-color: #ff3333; background: rgba(255, 51, 51, 0.02); padding: 0; overflow: hidden;">
+                    <button class="agency-btn small-btn" id="btn-volver-archivos-qr"
+                        style="margin-bottom: 20px; border-color: #00aaff; color: #00aaff;">⬅ VOLVER</button>
+                    <h3 style="color: #00aaff;">ESCÁNER QR — INTELIGENCIA DE CAMPO</h3>
 
-                        <div id="chat-messages"
-                            style="flex: 1; overflow-y: auto; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.95rem;">
-                            <!-- Mensajes inyectados por JS -->
-                            <div style="color: #ff3333; opacity: 0.6; margin-bottom: 15px;">[ CONEXIÓN ESTABLECIDA CON
-                                HQ ]</div>
+                    <div class="mission-details"
+                        style="border-left-color: #00aaff; background: rgba(0, 170, 255, 0.05); margin-bottom: 25px;">
+                        <p>Los agentes de La Orden han ocultado marcadores cifrados en el campo de operaciones.
+                            Apunte el escáner hacia el código QR para descifrar la información de inteligencia
+                            asociada.</p>
+                    </div>
+
+                    <div id="qr-scanner-area" style="width: 100%; max-width: 400px; margin: 0 auto 20px auto;">
+                        <div id="qr-reader" style="border: 2px solid #00aaff; border-radius: 6px; overflow: hidden;">
                         </div>
+                        <div id="qr-scan-status"
+                            style="text-align: center; margin-top: 10px; color: #00aaff; font-size: 0.9rem;">CÁMARA
+                            INICIALIZANDO...</div>
+                    </div>
 
-                        <div class="chat-input-area"
-                            style="padding: 15px; border-top: 1px solid rgba(255, 51, 51, 0.3); background: rgba(0,0,0,0.3); display: flex; gap: 10px;">
-                            <input type="text" id="chat-input-text" placeholder="ESCRIBA UN MENSAJE PARA EL MANDO..."
-                                style="flex: 1; background: transparent; border: 1px solid #ff3333; color: #ff3333; padding: 10px; font-family: inherit; outline: none;"
-                                autocomplete="off">
-                            <button class="agency-btn" id="btn-enviar-chat"
-                                style="border-color: #ff3333; color: #ff3333; padding: 10px 20px; min-width: auto;">ENVIAR</button>
-                        </div>
+                    <!-- Área donde aparece la pista descifrada -->
+                    <div id="qr-result-panel" class="hidden-tab"
+                        style="margin-top: 20px; border: 1px solid #00aaff; padding: 20px; border-radius: 6px; background: rgba(0,170,255,0.05);">
+                        <h4 style="color: #00aaff; margin-bottom: 10px;">▶ TRANSMISIÓN DESCIFRADA:</h4>
+                        <p id="qr-result-text" style="color: #fff; line-height: 1.8;"></p>
+                        <button class="agency-btn small-btn" id="btn-reescanear"
+                            style="border-color: #00aaff; color: #00aaff; margin-top: 15px;">↺ ESCANEAR OTRO
+                            CÓDIGO</button>
+                    </div>
+
+                    <div id="qr-unknown-panel" class="hidden-tab"
+                        style="margin-top: 20px; border: 1px solid #ff3333; padding: 20px; border-radius: 6px; background: rgba(255,51,51,0.05);">
+                        <h4 style="color: #ff3333;">⚠ CÓDIGO NO AUTORIZADO</h4>
+                        <p id="qr-unknown-text" style="color: #aaa;"></p>
+                        <button class="agency-btn small-btn" id="btn-reescanear-error"
+                            style="border-color: #ff3333; color: #ff3333; margin-top: 15px;">↺ INTENTAR DE
+                            NUEVO</button>
                     </div>
                 </div>
-
-            </main>
         </div>
+
+        <!-- Tab: Red Global -->
+        <div id="tab-red-global" class="tab-content hidden-tab">
+            <h2>RED DE INTELIGENCIA GLOBAL</h2>
+            <p style="color: #aaa; margin-bottom: 20px;">INTERCEPTANDO COMUNICACIONES DE OTRAS UNIDADES...</p>
+
+            <div class="live-feed-container" id="live-feed">
+                <!-- JS injected fake events -->
+            </div>
+        </div>
+
+        <!-- Tab: Enlace HQ (Chat) -->
+        <div id="tab-comunicaciones" class="tab-content hidden-tab">
+            <h2 style="color: #ff3333;">CANAL DE EMERGENCIA ALPHA — CUARTEL GENERAL</h2>
+            <p style="color: #aaa; margin-bottom: 20px;">ENLACE DIRECTO CON EL MANDO CENTRAL DE LA ORDEN.</p>
+
+            <div id="chat-container" class="glass-panel"
+                style="height: calc(100vh - 350px); min-height: 300px; display: flex; flex-direction: column; border-color: #ff3333; background: rgba(255, 51, 51, 0.02); padding: 0; overflow: hidden;">
+
+                <div id="chat-messages"
+                    style="flex: 1; overflow-y: auto; padding: 20px; font-family: 'Courier New', Courier, monospace; font-size: 0.95rem;">
+                    <!-- Mensajes inyectados por JS -->
+                    <div style="color: #ff3333; opacity: 0.6; margin-bottom: 15px;">[ CONEXIÓN ESTABLECIDA CON
+                        HQ ]</div>
+                </div>
+
+                <div class="chat-input-area"
+                    style="padding: 15px; border-top: 1px solid rgba(255, 51, 51, 0.3); background: rgba(0,0,0,0.3); display: flex; gap: 10px;">
+                    <input type="text" id="chat-input-text" placeholder="ESCRIBA UN MENSAJE PARA EL MANDO..."
+                        style="flex: 1; background: transparent; border: 1px solid #ff3333; color: #ff3333; padding: 10px; font-family: inherit; outline: none;"
+                        autocomplete="off">
+                    <button class="agency-btn" id="btn-enviar-chat"
+                        style="border-color: #ff3333; color: #ff3333; padding: 10px 20px; min-width: auto;">ENVIAR</button>
+                </div>
+            </div>
+        </div>
+
+        </main>
+    </div>
     </div>
 
     <!-- Modal de Advertencia QR (Global) -->
@@ -508,17 +514,19 @@
     <!-- Duplicate Process Overlay -->
     <div id="duplicate-process-overlay"
         style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 25000; display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; font-family: 'Courier New', monospace; padding: 20px;">
-        <div style="border: 2px solid #ff3333; padding: 30px; max-width: 500px; box-shadow: 0 0 20px rgba(255, 51, 51, 0.2);">
+        <div
+            style="border: 2px solid #ff3333; padding: 30px; max-width: 500px; box-shadow: 0 0 20px rgba(255, 51, 51, 0.2);">
             <h1 style="color: #ff3333; text-shadow: 0 0 10px #ff3333; margin-bottom: 20px;">[ ACCESO RESTRINGIDO ]</h1>
             <p style="color: #e0e0e0; font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
                 EL PROCESO DE DESENCRIPTADO YA HA SIDO INICIADO EN OTRO DISPOSITIVO DE LA RED.
             </p>
             <p style="color: #aaa; line-height: 1.6; margin-bottom: 25px;">
-                CUIDADO: Es imposible duplicar el proceso de enlace sin comprometer la seguridad de la Operación. 
+                CUIDADO: Es imposible duplicar el proceso de enlace sin comprometer la seguridad de la Operación.
                 <br><br>
                 Deben localizar el dispositivo que ha tomado el mando y trabajar conjuntamente desde esa terminal.
             </p>
-            <div style="color: #ff3333; font-weight: bold; letter-spacing: 2px; border-top: 1px solid rgba(255,51,51,0.3); padding-top: 15px;">
+            <div
+                style="color: #ff3333; font-weight: bold; letter-spacing: 2px; border-top: 1px solid rgba(255,51,51,0.3); padding-top: 15px;">
                 PROTOCOLO DE SEGURIDAD ALFA ACTIVO
             </div>
         </div>
