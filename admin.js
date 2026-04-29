@@ -367,62 +367,10 @@ function escucharEstadoMision() {
                 const end = data.tiempo_fin.toDate();
                 document.getElementById('val-mision-final').textContent = end.toLocaleTimeString();
                 document.getElementById('val-mision-final').style.color = "#33ff33";
-            } else {
-                document.getElementById('val-mision-final').textContent = "PENDIENTE";
-                document.getElementById('val-mision-final').style.color = "#888";
             }
 
         } else {
             missionStartTimeEl.textContent = "TIEMPO: --:--:--";
-            
-            // Si no hay tiempo de inicio activo, mostrar el HISTORIAL de misiones si existe
-            if (data.log_misiones) {
-                const log = data.log_misiones;
-                if (log.mision1) {
-                    document.getElementById('val-mision-1').textContent = `ANTERIOR (${log.mision1})`;
-                    document.getElementById('val-mision-1').style.color = "#aaa";
-                } else {
-                    document.getElementById('val-mision-1').textContent = "PENDIENTE";
-                    document.getElementById('val-mision-1').style.color = "#888";
-                }
-                
-                if (log.mision2) {
-                    document.getElementById('val-mision-2').textContent = `ANTERIOR (${log.mision2})`;
-                    document.getElementById('val-mision-2').style.color = "#aaa";
-                } else {
-                    document.getElementById('val-mision-2').textContent = "PENDIENTE";
-                    document.getElementById('val-mision-2').style.color = "#888";
-                }
-                
-                if (log.mision3) {
-                    document.getElementById('val-mision-3').textContent = `ANTERIOR (${log.mision3})`;
-                    document.getElementById('val-mision-3').style.color = "#aaa";
-                } else {
-                    document.getElementById('val-mision-3').textContent = "PENDIENTE";
-                    document.getElementById('val-mision-3').style.color = "#888";
-                }
-
-                if (log.inicio) {
-                    document.getElementById('val-mision-inicio').textContent = log.inicio;
-                    document.getElementById('val-mision-inicio').style.color = "#aaa";
-                }
-                if (log.fin) {
-                    document.getElementById('val-mision-final').textContent = log.fin;
-                    document.getElementById('val-mision-final').style.color = "#aaa";
-                }
-            } else {
-                // Reset total de la UI de misiones
-                document.getElementById('val-mision-inicio').textContent = "---";
-                document.getElementById('val-mision-1').textContent = "PENDIENTE";
-                document.getElementById('val-mision-2').textContent = "PENDIENTE";
-                document.getElementById('val-mision-3').textContent = "PENDIENTE";
-                document.getElementById('val-mision-final').textContent = "PENDIENTE";
-                
-                // Colores neutros
-                document.getElementById('val-mision-1').style.color = "#888";
-                document.getElementById('val-mision-2').style.color = "#888";
-                document.getElementById('val-mision-3').style.color = "#888";
-            }
         }
 
         // --- SINCRONIZAR CONFIGURACIÓN DE CITA ---
@@ -702,18 +650,6 @@ function configurarEventosGrupales() {
 
                 // 3. Resetear grupo (borrar tiempos y marcar activo y NO pausado)
                 const groupRef = doc(db, "grupos", GROUP_ID);
-                const groupSnap = await getDoc(groupRef);
-                const groupData = groupSnap.data() || {};
-
-                // Guardar log de misiones anteriores
-                const logMisiones = {
-                    inicio: groupData.tiempo_inicio ? groupData.tiempo_inicio.toDate().toLocaleTimeString() : null,
-                    mision1: groupData.mision1_fin ? groupData.mision1_fin.toDate().toLocaleTimeString() : null,
-                    mision2: groupData.mision2_fin ? groupData.mision2_fin.toDate().toLocaleTimeString() : null,
-                    mision3: groupData.mision_quimera_fin ? groupData.mision_quimera_fin.toDate().toLocaleTimeString() : null,
-                    fin: groupData.tiempo_fin ? groupData.tiempo_fin.toDate().toLocaleTimeString() : null
-                };
-
                 await updateDoc(groupRef, {
                     tiempo_inicio: null,
                     tiempo_fin: null,
@@ -723,10 +659,9 @@ function configurarEventosGrupales() {
                     energia_reclamada: false,
                     pausado: false,
                     pausa_inicio: null,
-                    activo: true,
-                    log_misiones: logMisiones
+                    activo: true
                 });
-                console.log("- Tiempos de misión borrados (guardados en log_misiones).");
+                console.log("- Tiempos de misión borrados.");
 
                 // 4. Detener contador local del admin si existe
                 if (timerInterval) {

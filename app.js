@@ -117,40 +117,7 @@ function escucharPausaGlobal() {
             }
         }
 
-        // 2. GESTIÓN DE REINICIO DE SESIÓN (RESET TOTAL)
-        // Si no hay tiempo de inicio pero el agente cree que está en la fase 2 o validado, es que ha habido un reset.
-        const estaEnFase2 = localStorage.getItem('fase2_desbloqueada') === 'true';
-        const estaValidado = localStorage.getItem('agente_validado') !== null;
-        
-        if (!data.tiempo_inicio && (estaEnFase2 || estaValidado)) {
-            console.log("DETECTADO RESET TOTAL DESDE MANDO CENTRAL. Limpiando sistema...");
-            
-            // Limpiar TODO el progreso local
-            const keysToClear = [
-                'fase2_desbloqueada',
-                'mision1_completada',
-                'mision1_finalizada',
-                'inmersion_desbloqueada',
-                'mision2_completada',
-                'quimera_desbloqueada',
-                'mision_energia_completada',
-                'mision_quimera_finalizada',
-                'mision_final_completada',
-                'timer_end_time',
-                'agente_validado',
-                'qr_operacionenigma1',
-                'qr_operacionenigma2',
-                'qr_operacionenigma3'
-            ];
-            
-            keysToClear.forEach(key => localStorage.removeItem(key));
-            
-            // Redirigir al inicio o recargar para limpiar estado de memoria
-            window.location.reload();
-            return;
-        }
-
-        // 3. GESTIÓN DE PROCESO DUPLICADO (Evitar que varios metan la clave grupal)
+        // 2. GESTIÓN DE PROCESO DUPLICADO (Evitar que varios metan la clave grupal)
         const duplicateOverlay = document.getElementById('duplicate-process-overlay');
         if (duplicateOverlay) {
             const yaDesbloqueado = localStorage.getItem('fase2_desbloqueada') === 'true';
@@ -469,9 +436,9 @@ async function pedirCodigoGrupo() {
     videoContainer.style.opacity = "0";
     videoContainer.style.transition = "opacity 2s";
 
-    // Ponemos el vídeo de la transmisión inicial
-    // ID actualizada según instrucciones: AZrsSMQS0Ac
-    videoContainer.innerHTML = `<iframe width="100%" height="315" style="max-width: 560px; border: 1px solid var(--text-color);" src="https://www.youtube.com/embed/AZrsSMQS0Ac" title="Transmisión La Orden" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    // Ponemos un vídeo de prueba de YouTube
+    // Puedes cambiar la ID "dQw4w9WgXcQ" por la ID del vídeo final
+    videoContainer.innerHTML = `<iframe width="100%" height="315" style="max-width: 560px; border: 1px solid var(--text-color);" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Transmisión La Orden" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 
     instructionLine.appendChild(videoContainer);
 
@@ -516,16 +483,15 @@ async function handleGroupCode(code) {
         const grantedSound = document.getElementById('access-granted-sound');
         grantedSound?.play().catch(() => { });
 
-        // Guardar que la fase 2 ha sido desbloqueada localmente ANTES de Firebase
-        // para evitar que el onSnapshot dispare la pantalla de "Proceso Duplicado"
-        localStorage.setItem('fase2_desbloqueada', 'true');
-
         // Registrar inicio de la partida en Firebase
         if (!groupData.tiempo_inicio) {
             await updateDoc(groupRef, {
                 tiempo_inicio: serverTimestamp()
             });
         }
+
+        // Guardar que la fase 2 ha sido desbloqueada localmente
+        localStorage.setItem('fase2_desbloqueada', 'true');
 
         setTimeout(() => {
             showAgencyInterface();

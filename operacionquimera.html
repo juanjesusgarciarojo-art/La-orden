@@ -136,7 +136,8 @@
                             <p style="color: #fff;">Hemos logrado bloquear al intruso temporalmente. Presten atención al informe visual. Esta canal podría no ser estable por mucho tiempo.</p>
                         </div>
                         <div class="video-container" style="margin-top: 20px; border: 1px solid #00ffcc; padding: 5px; box-shadow: 0 0 15px rgba(0,255,204,0.2);">
-                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/RLOz9Z1xH9s" title="Transmisión Quimera" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <!-- Reemplazar src con el video final de YouTube -->
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Transmisión Quimera" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
 
                         <!-- PANEL DE CONTRASEÑA FINAL -->
@@ -229,21 +230,7 @@
                     if (pauseOverlay) pauseOverlay.style.display = "none";
                     if (timerElement) timerElement.style.color = "#ff3333";
 
-                    // 2. GESTIÓN DE REINICIO DE SESIÓN (RESET TOTAL)
-                    if (!data.tiempo_inicio) {
-                        const keysToClear = [
-                            'fase2_desbloqueada', 'mision1_completada', 'mision1_finalizada',
-                            'inmersion_desbloqueada', 'mision2_completada', 'quimera_desbloqueada',
-                            'mision_energia_completada', 'mision_quimera_finalizada', 'mision_final_completada',
-                            'timer_end_time', 'agente_validado', 'qr_operacionenigma1',
-                            'qr_operacionenigma2', 'qr_operacionenigma3', 'hack_sequence_played_quimera'
-                        ];
-                        keysToClear.forEach(key => localStorage.removeItem(key));
-                        window.location.href = 'index.html';
-                        return;
-                    }
-
-                    // 3. Sincronizar Cronómetro (Mismo algoritmo que app.js)
+                    // 2. Sincronizar Cronómetro (Mismo algoritmo que app.js)
                     if (data.tiempo_inicio) {
                         let extraMs = data.energia_reclamada ? (10 * 60 * 1000) : 0;
                         const duration = (2 * 60 * 60 * 1000) + extraMs;
