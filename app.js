@@ -1373,6 +1373,7 @@ function setupMisionEnergiaEvents() {
                 }
 
                 localStorage.setItem('mision_energia_completada', 'true');
+                if (window.calcularProgreso) window.calcularProgreso();
 
                 const grantedSound = document.getElementById('access-granted-sound');
                 grantedSound?.play().catch(() => { });
@@ -1639,6 +1640,61 @@ function calcularProgreso() {
     const codigos = ['███', 'E-7█', 'E-74', 'ENϟI', 'ENIG', 'EN1GM'];
     const idx = Math.min(Math.floor((totalPeso / 100) * codigos.length), codigos.length - 1);
     if (codeEl) codeEl.textContent = codigos[idx];
+
+    // --- ACTUALIZACIÓN DINÁMICA DE ESTADOS EN EL GRID ---
+    // 1. Operación Ascenso
+    const statusAscenso = document.getElementById('status-ascenso');
+    if (statusAscenso) {
+        if (localStorage.getItem('mision1_finalizada') === 'true') {
+            statusAscenso.textContent = 'FINALIZADO';
+            statusAscenso.classList.remove('warning');
+            statusAscenso.style.color = '#33ff33'; // Éxito
+        } else {
+            statusAscenso.textContent = 'PENDIENTE';
+            statusAscenso.classList.add('warning');
+            statusAscenso.style.color = ''; // Reset
+        }
+    }
+
+    // 2. Operación Inmersión
+    const statusInmersion = document.getElementById('status-inmersion');
+    if (statusInmersion) {
+        if (localStorage.getItem('mision2_completada') === 'true') {
+            statusInmersion.textContent = 'FINALIZADO';
+            statusInmersion.style.color = '#33ff33';
+        } else if (localStorage.getItem('inmersion_desbloqueada') === 'true') {
+            statusInmersion.textContent = 'DESENCRIPTADO';
+            statusInmersion.style.color = '#bf66ff';
+        } else {
+            statusInmersion.textContent = 'ENCRIPTADO';
+            statusInmersion.style.color = '#777';
+        }
+    }
+
+    // 3. Suministros Energía
+    const statusEnergia = document.getElementById('status-energia');
+    if (statusEnergia) {
+        if (localStorage.getItem('mision_energia_completada') === 'true') {
+            statusEnergia.textContent = 'FINALIZADO';
+            statusEnergia.style.color = '#33ff33';
+            statusEnergia.classList.remove('warning');
+        }
+    }
+
+    // 4. Operación Quimera
+    const statusQuimera = document.getElementById('status-quimera');
+    if (statusQuimera) {
+        if (localStorage.getItem('mision_quimera_finalizada') === 'true') {
+            statusQuimera.textContent = 'FINALIZADO';
+            statusQuimera.style.color = '#33ff33';
+        } else if (localStorage.getItem('quimera_desbloqueada') === 'true') {
+            statusQuimera.textContent = 'AUTORIZADO';
+            statusQuimera.style.color = '#ff0044';
+        } else {
+            statusQuimera.textContent = 'ENCRIPTADO';
+            statusQuimera.style.color = '#777';
+        }
+    }
 }
 
 // Exportar para que la llamen otros módulos
