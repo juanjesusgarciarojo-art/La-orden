@@ -11,43 +11,126 @@
     <style>
         /* SECUENCIA DE HACKEO CSS */
         @keyframes glitch-anim {
-            0% { transform: translate(0) }
-            20% { transform: translate(-3px, 3px); filter: hue-rotate(90deg) saturate(200%) invert(10%); }
-            40% { transform: translate(-3px, -3px) }
-            60% { transform: translate(3px, 3px); filter: hue-rotate(-90deg) saturate(200%) invert(10%); }
-            80% { transform: translate(3px, -3px) }
-            100% { transform: translate(0) }
+            0% {
+                transform: translate(0)
+            }
+
+            20% {
+                transform: translate(-3px, 3px);
+                filter: hue-rotate(90deg) saturate(200%) invert(10%);
+            }
+
+            40% {
+                transform: translate(-3px, -3px)
+            }
+
+            60% {
+                transform: translate(3px, 3px);
+                filter: hue-rotate(-90deg) saturate(200%) invert(10%);
+            }
+
+            80% {
+                transform: translate(3px, -3px)
+            }
+
+            100% {
+                transform: translate(0)
+            }
         }
+
         .hack-glitch-active {
             animation: glitch-anim 0.15s infinite;
-            pointer-events: none; /* Bloquea interacciones */
+            pointer-events: none;
+            /* Bloquea interacciones */
         }
+
         #hack-countdown-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,0,0,0.15); display: none; align-items: center; justify-content: center;
-            z-index: 9999; font-size: 20rem; color: #ff0044; font-weight: bold; text-shadow: 0 0 40px #ff0044, 0 0 10px #fff;
-            font-family: 'Courier New', monospace; pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.15);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            font-size: 20rem;
+            color: #ff0044;
+            font-weight: bold;
+            text-shadow: 0 0 40px #ff0044, 0 0 10px #fff;
+            font-family: 'Courier New', monospace;
+            pointer-events: none;
         }
+
         #terminal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 10000; display: none; color: #33ff33;
-            font-family: 'Courier New', monospace; padding: 30px; font-size: 1.5rem;
-            box-shadow: inset 0 0 100px rgba(0,255,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 10000;
+            display: none;
+            color: #33ff33;
+            font-family: 'Courier New', monospace;
+            padding: 30px;
+            font-size: 1.5rem;
+            box-shadow: inset 0 0 100px rgba(0, 255, 0, 0.1);
         }
-        #terminal-text { white-space: pre-wrap; margin-bottom: 10px; }
-        .blinking-cursor { display: inline-block; width: 12px; height: 1.2rem; background: #33ff33; animation: blink 1s step-end infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
+
+        #terminal-text {
+            white-space: pre-wrap;
+            margin-bottom: 10px;
+        }
+
+        .blinking-cursor {
+            display: inline-block;
+            width: 12px;
+            height: 1.2rem;
+            background: #33ff33;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
 
         #recovery-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 10001; display: none; align-items: center; justify-content: center; flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 10001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
-        .recovery-bar-container { width: 300px; height: 15px; border: 2px solid #00ffcc; margin-top: 20px; padding: 2px; }
-        .recovery-bar-fill { width: 0%; height: 100%; background: #00ffcc; transition: width 0.1s linear; }
+
+        .recovery-bar-container {
+            width: 300px;
+            height: 15px;
+            border: 2px solid #00ffcc;
+            margin-top: 20px;
+            padding: 2px;
+        }
+
+        .recovery-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: #00ffcc;
+            transition: width 0.1s linear;
+        }
     </style>
 </head>
 
-<body style="background-color: #000; color: #00ffcc; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 0;">
+<body
+    style="background-color: #000; color: #00ffcc; font-family: 'Courier New', Courier, monospace; margin: 0; padding: 0;">
 
     <div id="agency-container" style="display: block;">
         <header class="agency-header">
@@ -109,53 +192,77 @@
             <main class="agency-content glass-panel" style="border-color: #ff0044;">
 
                 <div id="tab-dashboard" class="tab-content active-tab" style="display: block;">
-                    <button class="agency-btn small-btn" onclick="window.location.href='index.html?tab=archivos'" style="margin-bottom: 20px; border-color: #ff0044; color: #ff0044;">⬅ VOLVER</button>
-                    
-                    <h2 style="color: #ff0044; text-transform: uppercase; letter-spacing: 4px;">◈ OPERACIÓN QUIMERA ◈</h2>
+                    <button class="agency-btn small-btn" onclick="window.location.href='index.html?tab=archivos'"
+                        style="margin-bottom: 20px; border-color: #ff0044; color: #ff0044;">⬅ VOLVER</button>
+
+                    <h2 style="color: #ff0044; text-transform: uppercase; letter-spacing: 4px;">◈ OPERACIÓN QUIMERA ◈
+                    </h2>
                     <p style="color: #888; font-style: italic;">Acceso concedido. Nivel de seguridad: ALFA-VIOLETA.</p>
-                    
+
                     <div id="hack-target-content">
                         <!-- Esto se mostrará antes del hackeo y luego desaparecerá -->
-                        <div class="mission-details" style="border-left-color: #ff0044; background: rgba(255, 0, 68, 0.05); margin-top: 15px; margin-bottom: 25px;">
+                        <div class="mission-details"
+                            style="border-left-color: #ff0044; background: rgba(255, 0, 68, 0.05); margin-top: 15px; margin-bottom: 25px;">
                             <h3 style="color: #ff0044;">INSTRUCCIONES CLASIFICADAS:</h3>
-                            <p>[Aquí incluiremos la información, desafíos y acertijos complejos de la Misión Quimera.]</p>
-                            <p>Agentes, esta fase de la operación requiere una sincronización perfecta. No dejen rastro.</p>
+                            <p>[Aquí incluiremos la información, desafíos y acertijos complejos de la Misión Quimera.]
+                            </p>
+                            <p>Agentes, esta fase de la operación requiere una sincronización perfecta. No dejen rastro.
+                            </p>
                         </div>
                         <div style="margin-bottom: 30px; margin-top: 20px; text-align: center;">
                             <div style="border: 1px dashed #ff0044; padding: 40px; color: #ff0044;">
                                 <span style="font-size: 2rem;">[ DATOS CIFRADOS ]</span>
-                                <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">SINCRONIZANDO CON EL CUARTEL GENERAL PARA REVELAR OBJETIVOS...</p>
+                                <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">SINCRONIZANDO CON EL
+                                    CUARTEL GENERAL PARA REVELAR OBJETIVOS...</p>
                             </div>
                         </div>
                     </div>
 
                     <div id="post-hack-content" style="display: none;">
                         <!-- Esto se mostrará DESPUÉS de recuperar el control -->
-                         <div class="mission-details" style="border-left-color: #00ffcc; background: rgba(0, 255, 204, 0.05); margin-top: 15px; margin-bottom: 25px;">
+                        <div class="mission-details"
+                            style="border-left-color: #00ffcc; background: rgba(0, 255, 204, 0.05); margin-top: 15px; margin-bottom: 25px;">
                             <h3 style="color: #00ffcc;">TRANSMISIÓN ASEGURADA. CANAL CIFRADO.</h3>
-                            <p style="color: #fff;">Hemos logrado bloquear al intruso temporalmente. Presten atención al informe visual. Esta canal podría no ser estable por mucho tiempo.</p>
+                            <p style="color: #fff;">Hemos logrado bloquear al intruso temporalmente. Presten atención al
+                                informe visual. Esta canal podría no ser estable por mucho tiempo.</p>
                         </div>
-                        <div class="video-container" style="margin-top: 20px; border: 1px solid #00ffcc; padding: 5px; box-shadow: 0 0 15px rgba(0,255,204,0.2);">
+                        <div class="video-container"
+                            style="margin-top: 20px; border: 1px solid #00ffcc; padding: 5px; box-shadow: 0 0 15px rgba(0,255,204,0.2);">
                             <!-- Reemplazar src con el video final de YouTube -->
-                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Transmisión Quimera" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/Cv8rlxkIiro"
+                                title="Transmisión Quimera" frameborder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
                         </div>
 
                         <!-- PANEL DE CONTRASEÑA FINAL -->
-                        <div id="password-quimera-container" style="display: none; margin-top: 30px; border: 1px dashed #ff0044; padding: 25px; text-align: center; background: rgba(255, 0, 68, 0.05);">
-                            <h4 style="color: #ff0044; margin-bottom: 15px; letter-spacing: 2px;">🔓 PROTOCOLO DE CIERRE REQUERIDO</h4>
-                            <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 20px;">INTRODUZCA LA CLAVE REVELADA EN LA TRANSMISIÓN PARA FINALIZAR LA OPERACIÓN:</p>
-                            
-                            <div style="display: flex; gap: 10px; justify-content: center; flex-direction: column; align-items: center;">
-                                <input type="text" id="final-quimera-code" placeholder="CÓDIGO DE CIERRE" 
+                        <div id="password-quimera-container"
+                            style="display: none; margin-top: 30px; border: 1px dashed #ff0044; padding: 25px; text-align: center; background: rgba(255, 0, 68, 0.05);">
+                            <h4 style="color: #ff0044; margin-bottom: 15px; letter-spacing: 2px;">🔓 PROTOCOLO DE CIERRE
+                                REQUERIDO</h4>
+                            <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 20px;">INTRODUZCA LA CLAVE
+                                REVELADA EN LA TRANSMISIÓN PARA FINALIZAR LA OPERACIÓN:</p>
+
+                            <div
+                                style="display: flex; gap: 10px; justify-content: center; flex-direction: column; align-items: center;">
+                                <input type="text" id="final-quimera-code" placeholder="CÓDIGO DE CIERRE"
                                     style="background: transparent; border: 1px solid #ff0044; color: #ff0044; padding: 12px; outline: none; font-family: inherit; width: 250px; text-align: center; font-size: 1.1rem; letter-spacing: 3px;">
-                                <button id="btn-verify-quimera" class="agency-btn" style="border-color: #ff0044; color: #ff0044; width: 250px; margin: 0;">VERIFICAR CLAVE</button>
-                                <div id="quimera-error" style="color: #ff3333; margin-top: 10px; font-size: 0.85rem; height: 1.2rem;"></div>
+                                <button id="btn-verify-quimera" class="agency-btn"
+                                    style="border-color: #ff0044; color: #ff0044; width: 250px; margin: 0;">VERIFICAR
+                                    CLAVE</button>
+                                <div id="quimera-error"
+                                    style="color: #ff3333; margin-top: 10px; font-size: 0.85rem; height: 1.2rem;"></div>
                             </div>
 
                             <div id="quimera-success" style="display: none; margin-top: 20px;">
-                                <h3 style="color: #33ff33; text-shadow: 0 0 10px #33ff33;">[ OPERACIÓN FINALIZADA CON ÉXITO ]</h3>
-                                <p style="color: #fff; line-height: 1.6;">Buen trabajo, agentes. Han superado la Operación Quimera. El Mando Central ha recibido vuestro informe satisfactoriamente.</p>
-                                <button class="agency-btn" onclick="window.location.href='index.html'" style="margin-top: 15px; border-color: #33ff33; color: #33ff33;">VOLVER AL PANEL DE CONTROL</button>
+                                <h3 style="color: #33ff33; text-shadow: 0 0 10px #33ff33;">[ OPERACIÓN FINALIZADA CON
+                                    ÉXITO ]</h3>
+                                <p style="color: #fff; line-height: 1.6;">Buen trabajo, agentes. Han superado la
+                                    Operación Quimera. El Mando Central ha recibido vuestro informe satisfactoriamente.
+                                </p>
+                                <button class="agency-btn" onclick="window.location.href='index.html'"
+                                    style="margin-top: 15px; border-color: #33ff33; color: #33ff33;">VOLVER AL PANEL DE
+                                    CONTROL</button>
                             </div>
                         </div>
                     </div>
@@ -169,10 +276,12 @@
     <!-- Overlays Secuencia Hackeo -->
     <div id="hack-countdown-overlay">5</div>
     <div id="terminal-overlay">
-        <div id="terminal-text"></div><div class="blinking-cursor"></div>
+        <div id="terminal-text"></div>
+        <div class="blinking-cursor"></div>
     </div>
     <div id="recovery-overlay">
-        <img src="escudo.png" alt="Escudo La Orden" style="width: 120px; margin-bottom: 20px; opacity: 0.8; filter: drop-shadow(0 0 10px #00ffcc);">
+        <img src="escudo.png" alt="Escudo La Orden"
+            style="width: 120px; margin-bottom: 20px; opacity: 0.8; filter: drop-shadow(0 0 10px #00ffcc);">
         <h2 style="color: #00ffcc; font-size: 1.5rem; letter-spacing: 2px;">SISTEMA REINICIANDO...</h2>
         <div class="recovery-bar-container">
             <div class="recovery-bar-fill" id="recovery-bar"></div>
@@ -190,17 +299,24 @@
     <div id="pause-overlay"
         style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 20000; display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; font-family: 'Courier New', monospace;">
         <h1 style="color: #ffff33; text-shadow: 0 0 15px #ffff33; margin-bottom: 20px;">[ OPERACIÓN EN PAUSA ]</h1>
-        <p style="color: #aaa; max-width: 350px; line-height: 1.6;">EL MANDO CENTRAL HA DETENIDO TEMPORALMENTE LA MISIÓN POR MOTIVOS DE SEGURIDAD.</p>
-        <div style="margin-top: 30px; border: 1px dashed #ffff33; padding: 15px; color: #ffff33; width: 80%; max-width: 400px;">
-            <div style="font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #ffff33; padding-bottom: 5px;">☎️ CANAL DE EMERGENCIA HQ</div>
-            <div id="pause-chat-messages" style="height: 150px; overflow-y: auto; text-align: left; font-size: 0.85rem; margin-bottom: 10px; padding: 5px; background: rgba(255, 255, 51, 0.05);"></div>
+        <p style="color: #aaa; max-width: 350px; line-height: 1.6;">EL MANDO CENTRAL HA DETENIDO TEMPORALMENTE LA MISIÓN
+            POR MOTIVOS DE SEGURIDAD.</p>
+        <div
+            style="margin-top: 30px; border: 1px dashed #ffff33; padding: 15px; color: #ffff33; width: 80%; max-width: 400px;">
+            <div style="font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #ffff33; padding-bottom: 5px;">
+                ☎️ CANAL DE EMERGENCIA HQ</div>
+            <div id="pause-chat-messages"
+                style="height: 150px; overflow-y: auto; text-align: left; font-size: 0.85rem; margin-bottom: 10px; padding: 5px; background: rgba(255, 255, 51, 0.05);">
+            </div>
             <div style="display: flex; gap: 5px;">
-                <input type="text" id="pause-chat-input" placeholder="Responder al mando..." style="flex: 1; background: transparent; border: 1px solid #ffff33; color: #ffff33; padding: 8px; outline: none; font-family: inherit;">
-                <button id="btn-pause-send" style="background: #ffff33; color: #000; border: none; padding: 0 15px; font-weight: bold; cursor: pointer;">ENVIAR</button>
+                <input type="text" id="pause-chat-input" placeholder="Responder al mando..."
+                    style="flex: 1; background: transparent; border: 1px solid #ffff33; color: #ffff33; padding: 8px; outline: none; font-family: inherit;">
+                <button id="btn-pause-send"
+                    style="background: #ffff33; color: #000; border: none; padding: 0 15px; font-weight: bold; cursor: pointer;">ENVIAR</button>
             </div>
         </div>
     </div>
-    
+
     <script type="module">
         import { db } from './firebase.js';
         import { doc, onSnapshot, collection, query, orderBy, limit, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
@@ -218,7 +334,7 @@
             onSnapshot(groupRef, (snapshot) => {
                 if (!snapshot.exists()) return;
                 const data = snapshot.data();
-                
+
                 // 1. Gestión de Pausa Visual y Bloqueo
                 if (data.pausado) {
                     timerPaused = true;
@@ -236,7 +352,7 @@
                         const duration = (2 * 60 * 60 * 1000) + extraMs;
                         const calculatedEnd = data.tiempo_inicio.toDate().getTime() + duration;
                         localStorage.setItem('timer_end_time', calculatedEnd);
-                        
+
                         if (timerInterval) clearInterval(timerInterval);
                         timerInterval = setInterval(updateTimer, 1000);
                         updateTimer();
@@ -292,7 +408,7 @@
             let endTime = localStorage.getItem('timer_end_time');
             if (!endTime) return;
             endTime = parseInt(endTime, 10);
-            
+
             const now = Date.now();
             const diff = endTime - now;
 
@@ -301,7 +417,7 @@
                 const oh = Math.floor(overTime / (1000 * 60 * 60));
                 const om = Math.floor((overTime % (1000 * 60 * 60)) / (1000 * 60));
                 const os = Math.floor((overTime % (1000 * 60)) / 1000);
-                timerElement.innerText = "+" + (oh<10?"0"+oh:oh) + ":" + (om<10?"0"+om:om) + ":" + (os<10?"0"+os:os);
+                timerElement.innerText = "+" + (oh < 10 ? "0" + oh : oh) + ":" + (om < 10 ? "0" + om : om) + ":" + (os < 10 ? "0" + os : os);
                 timerElement.style.color = "#ffaa00";
                 return;
             }
@@ -309,7 +425,7 @@
             const h = Math.floor(diff / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((diff % (1000 * 60)) / 1000);
-            timerElement.innerText = (h<10?"0"+h:h) + ":" + (m<10?"0"+m:m) + ":" + (s<10?"0"+s:s);
+            timerElement.innerText = (h < 10 ? "0" + h : h) + ":" + (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
         }
 
         // Decoración y Radar
@@ -350,12 +466,12 @@
             // 2. Glitch y Sonido del intruso (6 segundos, duración del audio del router)
             reportQuimeraStatus("HACKEO EN CURSO");
             const routerSound = document.getElementById('router-sound');
-            if (routerSound) routerSound.play().catch(()=>{});
-            
+            if (routerSound) routerSound.play().catch(() => { });
+
             document.body.classList.add('hack-glitch-active');
             const countdownEl = document.getElementById('hack-countdown-overlay');
             countdownEl.style.display = 'flex';
-            
+
             for (let i = 5; i >= 0; i--) {
                 countdownEl.innerText = i;
                 await sleep(1000);
@@ -365,29 +481,29 @@
             document.body.classList.remove('hack-glitch-active');
             countdownEl.style.display = 'none';
             if (routerSound) { routerSound.pause(); routerSound.currentTime = 0; }
-            
+
             // Ocultar la barra temporalmente para inmersión
             document.querySelector('.timer-container').style.opacity = '0';
-            
+
             const terminalOverlay = document.getElementById('terminal-overlay');
             terminalOverlay.style.display = 'block';
 
             const terminalText = document.getElementById('terminal-text');
             await typeTerminalText("> SISTEMA COMPROMETIDO.\n> BYPASS DE SEGURIDAD: ÉXITO.\n> PERSONAL DESCONOCIDO ESTÁ TOMANDO EL CONTROL...\n", terminalText, 50);
-            
+
             // Suspense aumentado para mayor tensión (6s)
-            await sleep(6000); 
+            await sleep(6000);
 
             // 4. Contraataque (Recovery)
             terminalText.innerHTML += "\n<span style='color:#ff0044'>> ALERTA: CONEXIÓN INTERVENIDA POR LA ORDEN. PROTOCOLO DE PURGA INICIADO...</span>";
-            await sleep(4000); 
-            
+            await sleep(4000);
+
             terminalOverlay.style.display = 'none';
             const recoveryOverlay = document.getElementById('recovery-overlay');
             recoveryOverlay.style.display = 'flex';
 
             const barFill = document.getElementById('recovery-bar');
-            for(let p = 0; p <= 100; p += 5) {
+            for (let p = 0; p <= 100; p += 5) {
                 barFill.style.width = p + '%';
                 await sleep(150 + Math.random() * 100);
             }
@@ -402,15 +518,15 @@
 
         function showPostHackState() {
             const preHack = document.getElementById('hack-target-content');
-            if(preHack) preHack.style.display = 'none';
-            
+            if (preHack) preHack.style.display = 'none';
+
             const postHack = document.getElementById('post-hack-content');
-            if(postHack) postHack.style.display = 'block';
+            if (postHack) postHack.style.display = 'block';
 
             // A los 3 segundos aparece el contenedor de contraseña
             setTimeout(() => {
                 const passContainer = document.getElementById('password-quimera-container');
-                if(passContainer) {
+                if (passContainer) {
                     passContainer.style.display = 'block';
                     // Scroll suave hasta el panel
                     passContainer.scrollIntoView({ behavior: 'smooth' });
@@ -430,7 +546,7 @@
             btn.onclick = async () => {
                 const code = input.value.trim().toUpperCase();
                 // AQUÍ puedes poner la clave que quieras (ej: QUIMERA2026)
-                const CLAVE_OBJETIVO = "EXTINCION"; 
+                const CLAVE_OBJETIVO = "EXTINCION";
 
                 if (code === CLAVE_OBJETIVO) {
                     // Notificar a Firebase el fin de Quimera
@@ -441,10 +557,10 @@
                             quimera_estado: "FINALIZADA"
                         });
                         localStorage.setItem('mision_quimera_finalizada', 'true');
-                        
+
                         // Sonido éxito si existe (reutilizando app.js lógica)
                         const granted = document.getElementById('access-granted-sound');
-                        granted?.play().catch(() => {});
+                        granted?.play().catch(() => { });
 
                         // Mostrar éxito
                         input.parentElement.style.display = 'none';
@@ -457,7 +573,7 @@
                     setTimeout(() => error.innerText = "", 2500);
                     // Sonido error
                     const denied = document.getElementById('access-denied-sound');
-                    denied?.play().catch(() => {});
+                    denied?.play().catch(() => { });
                 }
             };
 
@@ -482,13 +598,13 @@
         // Arrancar
         setupPauseSystem();
         startRadarCoords();
-        
+
         // Reportar inicio de Quimera al Admin
         async function reportQuimeraStatus(status) {
             try {
                 const groupRef = doc(db, "grupos", GROUP_ID);
                 await updateDoc(groupRef, { quimera_estado: status });
-            } catch(e) {}
+            } catch (e) { }
         }
         reportQuimeraStatus("INVESTIGANDO");
 

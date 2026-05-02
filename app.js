@@ -824,6 +824,15 @@ function setupAgencyEvents() {
             if (btnArchivos) btnArchivos.click();
         });
     }
+    
+    // Volver a dashboard desde Red Global
+    const btnVolverRed = document.getElementById('btn-volver-dashboard-red');
+    if (btnVolverRed) {
+        btnVolverRed.addEventListener('click', () => {
+            const btnDashboard = document.querySelector('.nav-btn[data-tab="dashboard"]');
+            if (btnDashboard) btnDashboard.click();
+        });
+    }
 
     // Inicialiazr Misiones
     setupMision1Events();
@@ -1712,6 +1721,14 @@ function setupChatEvents() {
     const commModal = document.getElementById('comm-alert-modal');
     const btnIrAChat = document.getElementById('btn-ir-a-chat');
     const alertSound = document.getElementById('comm-alert-sound');
+    const btnVolverDashboard = document.getElementById('btn-volver-dashboard-chat');
+    
+    if (btnVolverDashboard) {
+        btnVolverDashboard.addEventListener('click', () => {
+            const btnDashboard = document.querySelector('.nav-btn[data-tab="dashboard"]');
+            if (btnDashboard) btnDashboard.click();
+        });
+    }
 
     if (!chatInput || !messagesContainer) return;
 
