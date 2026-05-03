@@ -255,8 +255,7 @@
 
             if (videoCont && detailsCont) {
                 setTimeout(() => {
-                    // Transición suave: ocultar vídeo y mostrar detalles
-                    videoCont.style.display = 'none';
+                    // Transición suave: mostrar detalles (el vídeo permanece visible arriba)
                     detailsCont.style.display = 'block';
                 }, 20000); // 20 segundos
             }
