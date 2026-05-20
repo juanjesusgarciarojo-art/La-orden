@@ -438,7 +438,7 @@ async function pedirCodigoGrupo() {
 
     // Ponemos un vídeo de prueba de YouTube
     // Puedes cambiar la ID "dQw4w9WgXcQ" por la ID del vídeo final
-    videoContainer.innerHTML = `<iframe width="100%" height="315" style="max-width: 560px; border: 1px solid var(--text-color);" src="https://www.youtube.com/embed/AZrsSMQS0Ac" title="Transmisión La Orden" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    videoContainer.innerHTML = `<iframe width="100%" height="315" style="max-width: 560px; border: 1px solid var(--text-color);" src="https://www.youtube.com/embed/xXrC6-09FSs" title="Transmisión La Orden" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
 
     instructionLine.appendChild(videoContainer);
 
